@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов» [![Build status][travis-image]][travis-url]
 
 * Студент: [Даниил Глинский](https://up.htmlacademy.ru/react/4/user/1001575).
-* Наставник: `Неизвестно`.
+* Наставник: [Степан Нарышков](https://htmlacademy.ru/profile/id95962).
 
 ---
 
