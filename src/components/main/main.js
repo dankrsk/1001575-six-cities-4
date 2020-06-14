@@ -8,7 +8,16 @@ const OFFER_PROP_TYPES = PropTypes.shape(
     }
 );
 
-const Card = (props) => {
+Card.propTypes = {
+  offer: OFFER_PROP_TYPES.isRequired,
+};
+
+Main.propTypes = {
+  rentOffersCount: PropTypes.number.isRequired,
+  offers: PropTypes.arrayOf(OFFER_PROP_TYPES).isRequired,
+};
+
+function Card(props) {
   const {offer: {title, price}} = props;
 
   return (
@@ -47,13 +56,9 @@ const Card = (props) => {
       </div>
     </article>
   );
-};
+}
 
-Card.propTypes = {
-  offer: OFFER_PROP_TYPES.isRequired,
-};
-
-const Main = (props) => {
+function Main(props) {
   const {rentOffersCount, offers} = props;
 
   return (
@@ -154,11 +159,6 @@ const Main = (props) => {
       </div>
     </React.Fragment>
   );
-};
-
-Main.propTypes = {
-  rentOffersCount: PropTypes.number.isRequired,
-  offers: PropTypes.arrayOf(OFFER_PROP_TYPES).isRequired,
-};
+}
 
 export default Main;
