@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/app/app.js';
+import App from './components/app/app.jsx';
 
 const rentOffersCount = 312;
 const offers = [
