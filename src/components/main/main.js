@@ -1,6 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const OFFER_PROP_TYPES = PropTypes.shape(
+    {
+      title: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+    }
+);
+
 const Card = (props) => {
   const {offer: {title, price}} = props;
 
@@ -43,12 +50,7 @@ const Card = (props) => {
 };
 
 Card.propTypes = {
-  offer: PropTypes.shape(
-      {
-        title: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-      }
-  ).isRequired,
+  offer: OFFER_PROP_TYPES.isRequired,
 };
 
 const Main = (props) => {
@@ -79,7 +81,6 @@ const Main = (props) => {
             </div>
           </div>
         </header>
-
         <main className="page__main page__main--index">
           <h1 className="visually-hidden">Cities</h1>
           <div className="tabs">
@@ -157,7 +158,7 @@ const Main = (props) => {
 
 Main.propTypes = {
   rentOffersCount: PropTypes.number.isRequired,
-  offers: PropTypes.array.isRequired,
+  offers: PropTypes.arrayOf(OFFER_PROP_TYPES).isRequired,
 };
 
 export default Main;
