@@ -1,12 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {OFFER_PROP_TYPES} from '../../shared/types.js';
 
 Card.propTypes = {
   offer: OFFER_PROP_TYPES.isRequired,
+  onTitleClick: PropTypes.func.isRequired,
 };
 
 function Card(props) {
-  const {offer: {title, price}} = props;
+  const {offer: {title, price}, onTitleClick} = props;
 
   return (
     <article className="cities__place-card place-card">
@@ -37,7 +39,7 @@ function Card(props) {
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
-        <h2 className="place-card__name">
+        <h2 className="place-card__name" onClick={onTitleClick}>
           <a href="#">{title}</a>
         </h2>
         <p className="place-card__type">Apartment</p>

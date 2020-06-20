@@ -6,10 +6,11 @@ import {OFFER_PROP_TYPES} from '../../shared/types.js';
 Main.propTypes = {
   rentOffersCount: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(OFFER_PROP_TYPES).isRequired,
+  onOffersTitleClick: PropTypes.func.isRequired,
 };
 
 function Main(props) {
-  const {rentOffersCount, offers} = props;
+  const {rentOffersCount, offers, onOffersTitleClick} = props;
 
   return (
     <React.Fragment>
@@ -96,7 +97,7 @@ function Main(props) {
                 </form>
                 <div className="cities__places-list places__list tabs__content">
                   {offers.map((offer, i) => {
-                    return <Card key={offer.title + i} offer={offer} />;
+                    return <Card key={offer.title + i} offer={offer} onTitleClick={onOffersTitleClick} />;
                   })}
                 </div>
               </section>

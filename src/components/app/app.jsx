@@ -8,6 +8,8 @@ App.propTypes = {
   offers: PropTypes.arrayOf(OFFER_PROP_TYPES).isRequired,
 };
 
+const onOffersTitleClick = () => {};
+
 function App(props) {
   const {rentOffersCount, offers} = props;
 
@@ -15,6 +17,7 @@ function App(props) {
     <Main
       rentOffersCount={rentOffersCount}
       offers={offers}
+      onOffersTitleClick={onOffersTitleClick}
     />
   );
 }
