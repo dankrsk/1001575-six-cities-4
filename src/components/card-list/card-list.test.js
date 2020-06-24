@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import App from '../app/app.jsx';
+import CardList from '../card-list/card-list.jsx';
 
 const rentOffersCount = 3;
 const offers = [
@@ -33,10 +33,10 @@ const offers = [
   },
 ];
 
-describe(`Snapshots for App`, () => {
-  it(`App component should render page content with 3 offers and 3 offers count`, () => {
+describe(`Snapshots for CardLst`, () => {
+  it(`CardList component should render card list with 3 cards`, () => {
     const tree = renderer
-      .create(<App
+      .create(<CardList
         rentOffersCount={rentOffersCount}
         offers={offers}
       />)

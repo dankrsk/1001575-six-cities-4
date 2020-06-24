@@ -4,20 +4,28 @@ import {OFFER_PROP_TYPES} from '../../shared/types.js';
 
 Card.propTypes = {
   offer: OFFER_PROP_TYPES.isRequired,
-  onTitleClick: PropTypes.func.isRequired,
+  mouseOverCardHandler: PropTypes.func.isRequired,
 };
 
+const MULTIPLIER_FOR_RATING = 20;
+
 function Card(props) {
-  const {offer: {title, price}, onTitleClick} = props;
+  const {offer: {id, type, title, price, rating, isPremium, photo}, mouseOverCardHandler} = props;
+  const ratingInPercent = MULTIPLIER_FOR_RATING * rating;
 
   return (
-    <article className="cities__place-card place-card">
-      <div className="place-card__mark">
-        <span>Premium</span>
-      </div>
+    <article className="cities__place-card place-card" onMouseOver={() => {
+      mouseOverCardHandler(id);
+    }}>
+      {isPremium ?
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div>
+        : ``
+      }
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src="img/apartment-01.jpg" width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={photo} width="260" height="200" alt="Place image" />
         </a>
       </div>
       <div className="place-card__info">
@@ -35,14 +43,14 @@ function Card(props) {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `80%`}}></span>
+            <span style={{width: `${ratingInPercent}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
-        <h2 className="place-card__name" onClick={onTitleClick}>
+        <h2 className="place-card__name">
           <a href="#">{title}</a>
         </h2>
-        <p className="place-card__type">Apartment</p>
+        <p className="place-card__type">{type}</p>
       </div>
     </article>
   );

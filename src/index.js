@@ -1,30 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app.jsx';
+import {getOffers} from './mocks/offers.js';
 
-const rentOffersCount = 312;
-const offers = [
-  {
-    title: `Beautiful & luxurious apartment at great location`,
-    price: 120,
-  },
-  {
-    title: `Wood and stone place`,
-    price: 80,
-  },
-  {
-    title: `Canal View Prinsengracht`,
-    price: 132,
-  },
-  {
-    title: `Nice, cozy, warm big bed apartment`,
-    price: 180,
-  },
-  {
-    title: `Wood and stone place`,
-    price: 80,
-  }
-];
+const rentOffersCount = 4;
+const offers = getOffers(rentOffersCount);
 
 ReactDOM.render(
     <App
