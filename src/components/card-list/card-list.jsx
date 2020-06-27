@@ -9,10 +9,10 @@ export default class CardList extends React.Component {
     this.state = {
       hoverCardId: -1,
     };
-    this.mouseOverCardHandler = this.mouseOverCardHandler.bind(this);
+    this.handleCardMouseOver = this.handleCardMouseOver.bind(this);
   }
 
-  mouseOverCardHandler(id) {
+  handleCardMouseOver(id) {
     this.setState({
       hoverCardId: id,
     });
@@ -44,7 +44,7 @@ export default class CardList extends React.Component {
             </form>
             <div className="cities__places-list places__list tabs__content">
               {offers.map((offer) => {
-                return <Card key={offer.id} offer={offer} mouseOverCardHandler={this.mouseOverCardHandler} />;
+                return <Card key={offer.id} offer={offer} onCardMouseOver={this.handleCardMouseOver} />;
               })}
             </div>
           </section>

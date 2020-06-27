@@ -185,7 +185,6 @@ exports[`Snapshots for CardLst CardList component should render card list with 3
           className="cities__place-card place-card"
           onMouseOver={[Function]}
         >
-          
           <div
             className="cities__image-wrapper place-card__image-wrapper"
           >

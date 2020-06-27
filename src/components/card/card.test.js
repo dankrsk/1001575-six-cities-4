@@ -17,7 +17,7 @@ describe(`Snapshots for Card`, () => {
     const tree = renderer
       .create(<Card
         offer={offer}
-        mouseOverCardHandler={() => {}}
+        onCardMouseOver={() => {}}
       />)
       .toJSON();
 

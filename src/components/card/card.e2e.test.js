@@ -1,11 +1,6 @@
 import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import {shallow} from 'enzyme';
 import Card from '../card/card.jsx';
-
-Enzyme.configure({
-  adapter: new Adapter(),
-});
 
 const mock = {
   offer: {
@@ -21,17 +16,17 @@ const mock = {
 
 describe(`e2e-tests for Card`, () => {
   it(`MouseOverHandler should receive offer's id`, () => {
-    const mouseOverCardHandler = jest.fn();
+    const handleCardMouseOver = jest.fn();
 
     const card = shallow(
         <Card
           offer={mock.offer}
-          mouseOverCardHandler={mouseOverCardHandler}
+          onCardMouseOver={handleCardMouseOver}
         />
     );
 
     card.simulate(`mouseover`, {});
 
-    expect(mouseOverCardHandler.mock.calls[0][0]).toBe(mock.offer.id);
+    expect(handleCardMouseOver.mock.calls[0][0]).toBe(mock.offer.id);
   });
 });
