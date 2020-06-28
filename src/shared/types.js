@@ -9,6 +9,7 @@ export const OFFER_PROP_TYPES = PropTypes.shape(
       rating: PropTypes.number.isRequired,
       isPremium: PropTypes.bool.isRequired,
       photo: PropTypes.string.isRequired,
+      coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
     }
 );
 
