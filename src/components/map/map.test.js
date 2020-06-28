@@ -1,13 +1,12 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import CardList from '../card-list/card-list.jsx';
+import Map from '../map/map.jsx';
 import {mock} from '../../shared/test-mocks.js';
 
-describe(`Snapshots for CardLst`, () => {
-  it(`CardList component should render card list with 3 cards`, () => {
+describe(`Snapshots for Map`, () => {
+  it(`Map component should render container for map`, () => {
     const tree = renderer
-      .create(<CardList
-        rentOffersCount={mock.rentOffersCount}
+      .create(<Map
         offers={mock.offers}
       />)
       .toJSON();

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Card from '../card/card.jsx';
+import Map from '../map/map.jsx';
 import {OFFER_PROP_TYPES} from '../../shared/types.js';
 
 export default class CardList extends React.Component {
@@ -49,7 +50,7 @@ export default class CardList extends React.Component {
             </div>
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map"></section>
+            <Map offers={offers} />
           </div>
         </div>
       </div>

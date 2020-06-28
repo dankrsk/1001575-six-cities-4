@@ -1,18 +1,7 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import Card from '../card/card.jsx';
-
-const mock = {
-  offer: {
-    id: 1,
-    type: `House`,
-    title: `Beautiful & luxurious apartment at great location`,
-    price: 100,
-    rating: 1,
-    isPremium: true,
-    photo: `http://cdn.home-designing.com/wp-content/uploads/2013/11/1-Contemporary-architecture.jpg`,
-  },
-};
+import {mock} from '../../shared/test-mocks.js';
 
 describe(`e2e-tests for Card`, () => {
   it(`MouseOverHandler should receive offer's id`, () => {
@@ -20,13 +9,13 @@ describe(`e2e-tests for Card`, () => {
 
     const card = shallow(
         <Card
-          offer={mock.offer}
+          offer={mock.offers[0]}
           onCardMouseOver={handleCardMouseOver}
         />
     );
 
     card.simulate(`mouseover`, {});
 
-    expect(handleCardMouseOver.mock.calls[0][0]).toBe(mock.offer.id);
+    expect(handleCardMouseOver.mock.calls[0][0]).toBe(mock.offers[0].id);
   });
 });
