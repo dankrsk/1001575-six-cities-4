@@ -1,15 +1,21 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../reducer.js';
 import CardList from '../card-list/card-list.jsx';
+import CityList from '../city-list/city-list.jsx';
+import {getOffersByCity} from '../../utils/offers.js';
+import PropTypes from 'prop-types';
 import {OFFER_PROP_TYPES} from '../../shared/types.js';
 
 Main.propTypes = {
-  rentOffersCount: PropTypes.number.isRequired,
+  currentCity: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(OFFER_PROP_TYPES).isRequired,
+  onCityLinkClick: PropTypes.func.isRequired,
 };
 
 function Main(props) {
-  const {rentOffersCount, offers} = props;
+  const {currentCity, offers, onCityLinkClick} = props;
+  const currentCityOffers = getOffersByCity(currentCity, offers);
 
   return (
     <React.Fragment>
@@ -37,46 +43,14 @@ function Main(props) {
           </div>
         </header>
         <main className="page__main page__main--index">
-          <h1 className="visually-hidden">Cities</h1>
-          <div className="tabs">
-            <section className="locations container">
-              <ul className="locations__list tabs__list">
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#">
-                    <span>Paris</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#">
-                    <span>Cologne</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#">
-                    <span>Brussels</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item tabs__item--active">
-                    <span>Amsterdam</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#">
-                    <span>Hamburg</span>
-                  </a>
-                </li>
-                <li className="locations__item">
-                  <a className="locations__item-link tabs__item" href="#">
-                    <span>Dusseldorf</span>
-                  </a>
-                </li>
-              </ul>
-            </section>
-          </div>
-          <CardList
-            rentOffersCount={rentOffersCount}
+          <CityList
+            currentCity={currentCity}
             offers={offers}
+            onCityLinkClick={onCityLinkClick}
+          />
+          <CardList
+            city={currentCity}
+            offers={currentCityOffers}
           />
         </main>
       </div>
@@ -84,4 +58,20 @@ function Main(props) {
   );
 }
 
-export default Main;
+const mapStateToProps = (state) => {
+  return {
+    currentCity: state.city,
+    offers: state.offers,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onCityLinkClick(city) {
+      dispatch(ActionCreator.changeCity(city));
+    }
+  };
+};
+
+export {Main};
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

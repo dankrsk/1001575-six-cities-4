@@ -1,3 +1,12 @@
+const CITIES = [
+  `Paris`,
+  `Cologne`,
+  `Brussels`,
+  `Amsterdam`,
+  `Hamburg`,
+  `Dusseldorf`,
+];
+
 const TYPES = [
   `Apartment`,
   `Room`,
@@ -23,6 +32,7 @@ const COORDINATES = [
 const getOffer = (i) => {
   return {
     id: Math.round(Math.random() * 10000),
+    city: CITIES[i % 6],
     type: TYPES[Math.round(Math.random() * 3)],
     title: TITLES[Math.round(Math.random() * 4)],
     price: Math.round(Math.random() * 100),
