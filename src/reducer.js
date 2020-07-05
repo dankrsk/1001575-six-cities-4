@@ -1,14 +1,14 @@
 import {getOffers} from './mocks/offers.js';
 import {extend} from './utils/common.js';
 
-const OFFERS_COUNT = 25;
+export const OFFERS_COUNT = 6;
 
 const initialState = {
   city: `Paris`,
   offers: getOffers(OFFERS_COUNT),
 };
 
-const ActionType = {
+export const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
   GET_OFFERS: `GET_OFFERS`,
 };
@@ -36,7 +36,7 @@ export const reducer = (state = initialState, action) => {
       });
     case ActionType.GET_OFFERS:
       return extend(state, {
-        offers: getOffers(OFFERS_COUNT),
+        offers: action.payload,
       });
     default:
       return state;
