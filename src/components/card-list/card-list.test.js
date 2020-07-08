@@ -4,10 +4,10 @@ import CardList from '../card-list/card-list.jsx';
 import {mock} from '../../shared/test-mocks.js';
 
 describe(`Snapshots for CardLst`, () => {
-  it(`CardList component should render card list with 3 cards`, () => {
+  it(`CardList component`, () => {
     const tree = renderer
       .create(<CardList
-        rentOffersCount={mock.rentOffersCount}
+        city={`Paris`}
         offers={mock.offers}
       />)
       .toJSON();

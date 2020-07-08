@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app.jsx';
-import {getOffers} from './mocks/offers.js';
+import {createStore} from 'redux';
+import {reducer} from './reducer.js';
+import {Provider} from 'react-redux';
 
-const rentOffersCount = 4;
-const offers = getOffers(rentOffersCount);
+const store = createStore(reducer);
 
 ReactDOM.render(
-    <App
-      rentOffersCount={rentOffersCount}
-      offers={offers}
-    />,
+    <Provider store={store}>
+      <App />
+    </Provider>,
     document.querySelector(`#root`)
 );

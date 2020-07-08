@@ -1,19 +1,28 @@
 import React from 'react';
+import {Provider} from 'react-redux';
 import renderer from 'react-test-renderer';
 import App from '../app/app.jsx';
+import configureStore from 'redux-mock-store';
 import {mock} from '../../shared/test-mocks.js';
 
+const mockStore = configureStore([]);
+
 describe(`Snapshots for App`, () => {
-  it(`App component should render page content with 3 offers and 3 offers count`, () => {
+  it(`App component`, () => {
+    const store = mockStore({
+      city: `Paris`,
+      offers: mock.offers,
+    });
+
     const tree = renderer
-      .create(<App
-        rentOffersCount={mock.rentOffersCount}
-        offers={mock.offers}
-      />, {
-        createNodeMock: () => {
-          return {};
-        }
-      }).toJSON();
+      .create(
+          <Provider store={store}>
+            <App />
+          </Provider>, {
+            createNodeMock: () => {
+              return {};
+            }
+          }).toJSON();
 
     expect(tree).toMatchSnapshot();
   });

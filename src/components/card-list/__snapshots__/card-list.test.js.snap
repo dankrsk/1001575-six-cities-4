@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Snapshots for CardLst CardList component should render card list with 3 cards 1`] = `
+exports[`Snapshots for CardLst CardList component 1`] = `
 <div
   className="cities"
 >
@@ -19,7 +19,8 @@ exports[`Snapshots for CardLst CardList component should render card list with 3
         className="places__found"
       >
         3
-         places to stay in Amsterdam
+         places to stay in 
+        Paris
       </b>
       <form
         action="#"
@@ -47,7 +48,7 @@ exports[`Snapshots for CardLst CardList component should render card list with 3
           </svg>
         </span>
         <ul
-          className="places__options places__options--custom places__options--opened"
+          className="places__options places__options--custom"
         >
           <li
             className="places__option places__option--active"

@@ -1,8 +1,8 @@
 export const mock = {
-  rentOffersCount: 3,
   offers: [
     {
       id: 1,
+      city: `Paris`,
       type: `House`,
       title: `Beautiful & luxurious apartment at great location`,
       price: 100,
@@ -13,6 +13,7 @@ export const mock = {
     },
     {
       id: 2,
+      city: `Cologne`,
       type: `Room`,
       title: `Wood and stone place`,
       price: 200,
@@ -23,6 +24,7 @@ export const mock = {
     },
     {
       id: 3,
+      city: `Brussels`,
       type: `Appartment`,
       title: `Nice, cozy, warm big bed apartment`,
       price: 300,
