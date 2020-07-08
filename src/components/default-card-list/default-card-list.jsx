@@ -4,7 +4,7 @@ import Card from '../card/card.jsx';
 import Map from '../map/map.jsx';
 import {OFFER_PROP_TYPES} from '../../shared/types.js';
 
-export default class DefaultCardList extends React.Component {
+export default class DefaultCardList extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
