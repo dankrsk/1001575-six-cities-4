@@ -10,11 +10,12 @@ import {OFFER_PROP_TYPES} from '../../shared/types.js';
 Main.propTypes = {
   currentCity: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(OFFER_PROP_TYPES).isRequired,
+  allCities: PropTypes.arrayOf(PropTypes.string).isRequired,
   onCityLinkClick: PropTypes.func.isRequired,
 };
 
 function Main(props) {
-  const {currentCity, offers, onCityLinkClick} = props;
+  const {currentCity, offers, allCities, onCityLinkClick} = props;
   const currentCityOffers = getOffersByCity(currentCity, offers);
 
   return (
@@ -45,7 +46,7 @@ function Main(props) {
         <main className="page__main page__main--index">
           <CityList
             currentCity={currentCity}
-            offers={offers}
+            allCities={allCities}
             onCityLinkClick={onCityLinkClick}
           />
           <CardList
@@ -62,6 +63,7 @@ const mapStateToProps = (state) => {
   return {
     currentCity: state.city,
     offers: state.offers,
+    allCities: state.allCities,
   };
 };
 

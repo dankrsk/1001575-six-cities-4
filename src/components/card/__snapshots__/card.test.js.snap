@@ -3,6 +3,7 @@
 exports[`Snapshots for Card Card component should render 1 card for mock offer 1`] = `
 <article
   className="cities__place-card place-card"
+  onMouseOut={[Function]}
   onMouseOver={[Function]}
 >
   <div

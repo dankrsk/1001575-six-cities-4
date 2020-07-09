@@ -13,18 +13,24 @@ const CitiesCoordinates = {
 };
 
 const LEAFLET_SETTINGS = {
-  icon: leaflet.icon({
-    iconUrl: `img/pin.svg`,
-    iconSize: [30, 30]
+  defaultIcon: leaflet.icon({
+    iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png`,
+    iconSize: [25, 41]
+  }),
+  activeIcon: leaflet.icon({
+    iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-orange.png`,
+    iconSize: [25, 41]
   }),
   zoom: 12,
 };
 
-export default class Map extends React.Component {
+export default class OffersMap extends React.Component {
   constructor(props) {
     super(props);
 
     this._map = null;
+    this._city = null;
+    this._activeMarker = null;
     this._renderedMarkers = null;
 
     this._mapContainerRef = React.createRef();
@@ -46,17 +52,28 @@ export default class Map extends React.Component {
   }
 
   _renderMarkers() {
-    this._renderedMarkers = [];
+    this._renderedMarkers = new Map();
 
     this.props.offers.forEach((offer) => {
-      const marker = leaflet.marker(offer.coordinates, {icon: LEAFLET_SETTINGS.icon});
+      const marker = leaflet.marker(offer.coordinates, {icon: LEAFLET_SETTINGS.defaultIcon});
       marker.addTo(this._map);
-      this._renderedMarkers.push(marker);
+      this._renderedMarkers.set(offer.id, marker);
     });
   }
 
+  _renderActiveMarker() {
+    const marker = this._renderedMarkers.get(this.props.activeCardId);
+    if (marker) {
+      marker.setIcon(LEAFLET_SETTINGS.activeIcon);
+      this._activeMarker = marker;
+    } else {
+      this._activeMarker.setIcon(LEAFLET_SETTINGS.defaultIcon);
+    }
+  }
+
   _createMap() {
-    const city = CitiesCoordinates[this.props.city];
+    this._city = this.props.city;
+    const city = CitiesCoordinates[this._city];
     this._map = leaflet.map(this._mapContainerRef.current, {
       center: city,
       zoom: LEAFLET_SETTINGS.zoom,
@@ -74,11 +91,16 @@ export default class Map extends React.Component {
   }
 
   _updateMap() {
-    const city = CitiesCoordinates[this.props.city];
-    this._map.setView(city, LEAFLET_SETTINGS.zoom);
+    if (this._city !== this.props.city) {
+      this._city = this.props.city;
+      const city = CitiesCoordinates[this._city];
+      this._map.setView(city, LEAFLET_SETTINGS.zoom);
 
-    this._removeMarkers();
-    this._renderMarkers();
+      this._removeMarkers();
+      this._renderMarkers();
+    } else {
+      this._renderActiveMarker();
+    }
   }
 
   render() {
@@ -92,7 +114,8 @@ export default class Map extends React.Component {
   }
 }
 
-Map.propTypes = {
+OffersMap.propTypes = {
   offers: PropTypes.arrayOf(OFFER_PROP_TYPES).isRequired,
   city: PropTypes.string.isRequired,
+  activeCardId: PropTypes.number.isRequired,
 };

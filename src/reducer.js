@@ -1,11 +1,14 @@
 import {getOffers} from './mocks/offers.js';
 import {extend} from './utils/common.js';
+import {getCitiesFromOffers} from './utils/offers.js';
 
-export const OFFERS_COUNT = 6;
+export const OFFERS_COUNT = 12;
+const initialOffers = getOffers(OFFERS_COUNT);
 
 const initialState = {
   city: `Paris`,
-  offers: getOffers(OFFERS_COUNT),
+  offers: initialOffers,
+  allCities: getCitiesFromOffers(initialOffers),
 };
 
 export const ActionType = {

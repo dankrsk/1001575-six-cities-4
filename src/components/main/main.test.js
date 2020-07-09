@@ -4,6 +4,7 @@ import renderer from 'react-test-renderer';
 import Main from '../main/main.jsx';
 import configureStore from 'redux-mock-store';
 import {mock} from '../../shared/test-mocks.js';
+import {getCitiesFromOffers} from '../../utils/offers.js';
 
 const mockStore = configureStore([]);
 
@@ -12,6 +13,7 @@ describe(`Snapshots for Main`, () => {
     const store = mockStore({
       city: `Paris`,
       offers: mock.offers,
+      allCities: getCitiesFromOffers(mock.offers),
     });
     const tree = renderer
       .create(
@@ -19,6 +21,7 @@ describe(`Snapshots for Main`, () => {
             <Main
               currentCity={`Paris`}
               offers={mock.offers}
+              allCities={getCitiesFromOffers(mock.offers)}
               onCityLinkClick={() => {}}
             />
           </Provider>
