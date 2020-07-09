@@ -1,16 +1,14 @@
 import React from 'react';
-import {getCitiesFromOffers} from '../../utils/offers.js';
 import PropTypes from 'prop-types';
-import {OFFER_PROP_TYPES} from '../../shared/types.js';
 
 CityList.propTypes = {
   currentCity: PropTypes.string.isRequired,
-  offers: PropTypes.arrayOf(OFFER_PROP_TYPES).isRequired,
+  allCities: PropTypes.arrayOf(PropTypes.string).isRequired,
   onCityLinkClick: PropTypes.func.isRequired,
 };
 
 function CityList(props) {
-  const {currentCity, offers, onCityLinkClick} = props;
+  const {currentCity, allCities, onCityLinkClick} = props;
 
   return (
     <React.Fragment>
@@ -18,7 +16,7 @@ function CityList(props) {
       <div className="tabs">
         <section className="locations container">
           <ul className="locations__list tabs__list">
-            {getCitiesFromOffers(offers).map((city) => {
+            {allCities.map((city) => {
               return (
                 <li key={city} className="locations__item">
                   <a

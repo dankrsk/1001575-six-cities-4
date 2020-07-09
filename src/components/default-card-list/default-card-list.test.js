@@ -9,6 +9,8 @@ describe(`Snapshots for DefaultCardList`, () => {
       .create(<DefaultCardList
         city={`Paris`}
         offers={mock.offers}
+        activeCardId={1}
+        handleCardAction={() => {}}
       />)
       .toJSON();
 

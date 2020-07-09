@@ -15,7 +15,9 @@ describe(`e2e-tests for Card`, () => {
     );
 
     card.simulate(`mouseover`, {});
+    card.simulate(`mouseout`, {});
 
     expect(handleCardMouseOver.mock.calls[0][0]).toBe(mock.offers[0].id);
+    expect(handleCardMouseOver.mock.calls[1][0]).toBe(-1);
   });
 });

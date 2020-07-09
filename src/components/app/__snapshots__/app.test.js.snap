@@ -195,6 +195,7 @@ exports[`Snapshots for App App component 1`] = `
           >
             <article
               className="cities__place-card place-card"
+              onMouseOut={[Function]}
               onMouseOver={[Function]}
             >
               <div
