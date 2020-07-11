@@ -189,6 +189,13 @@ exports[`Snapshots for CardLst CardList component 1`] = `
           onMouseOver={[Function]}
         >
           <div
+            className="place-card__mark"
+          >
+            <span>
+              Premium
+            </span>
+          </div>
+          <div
             className="cities__image-wrapper place-card__image-wrapper"
           >
             <a
@@ -198,7 +205,7 @@ exports[`Snapshots for CardLst CardList component 1`] = `
                 alt="Place image"
                 className="place-card__image"
                 height="200"
-                src="https://avatars.mds.yandex.net/get-pdb/215709/4d8ee911-7746-43da-a5cd-b7f9d2f3f839/s1200?webp=false"
+                src="http://cdn.home-designing.com/wp-content/uploads/2013/11/1-Contemporary-architecture.jpg"
                 width="260"
               />
             </a>
@@ -216,7 +223,7 @@ exports[`Snapshots for CardLst CardList component 1`] = `
                   className="place-card__price-value"
                 >
                   €
-                  200
+                  100
                 </b>
                 <span
                   className="place-card__price-text"
@@ -253,7 +260,7 @@ exports[`Snapshots for CardLst CardList component 1`] = `
                 <span
                   style={
                     Object {
-                      "width": "40%",
+                      "width": "20%",
                     }
                   }
                 />
@@ -270,13 +277,13 @@ exports[`Snapshots for CardLst CardList component 1`] = `
               <a
                 href="#"
               >
-                Wood and stone place
+                Beautiful & luxurious apartment at great location
               </a>
             </h2>
             <p
               className="place-card__type"
             >
-              Room
+              Apartment
             </p>
           </div>
         </article>
@@ -302,7 +309,7 @@ exports[`Snapshots for CardLst CardList component 1`] = `
                 alt="Place image"
                 className="place-card__image"
                 height="200"
-                src="https://avatars.mds.yandex.net/get-pdb/215709/4d8ee911-7746-43da-a5cd-b7f9d2f3f839/s1200?webp=false"
+                src="http://cdn.home-designing.com/wp-content/uploads/2013/11/1-Contemporary-architecture.jpg"
                 width="260"
               />
             </a>
@@ -320,7 +327,7 @@ exports[`Snapshots for CardLst CardList component 1`] = `
                   className="place-card__price-value"
                 >
                   €
-                  300
+                  100
                 </b>
                 <span
                   className="place-card__price-text"
@@ -357,7 +364,7 @@ exports[`Snapshots for CardLst CardList component 1`] = `
                 <span
                   style={
                     Object {
-                      "width": "60%",
+                      "width": "20%",
                     }
                   }
                 />
@@ -374,13 +381,13 @@ exports[`Snapshots for CardLst CardList component 1`] = `
               <a
                 href="#"
               >
-                Nice, cozy, warm big bed apartment
+                Beautiful & luxurious apartment at great location
               </a>
             </h2>
             <p
               className="place-card__type"
             >
-              Appartment
+              Room
             </p>
           </div>
         </article>

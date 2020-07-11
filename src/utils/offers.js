@@ -1,11 +1,5 @@
 const CITIES_COUNT = 6;
 
-export const getOffersByCity = (city, offers) => {
-  return offers.filter((offer) => {
-    return offer.city === city;
-  });
-};
-
 export const getCitiesFromOffers = (offers) => {
   const cities = [];
   let i = 0;

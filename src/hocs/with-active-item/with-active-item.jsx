@@ -11,7 +11,7 @@ const withActiveItem = (Component) => {
       this.handleCardAction = this.handleCardAction.bind(this);
     }
 
-    handleCardAction(id) {
+    handleCardAction(id = -1) {
       this.setState({
         activeCardId: id,
       });

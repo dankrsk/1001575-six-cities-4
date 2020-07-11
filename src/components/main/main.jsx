@@ -1,11 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../reducer.js';
+import {ActionCreator as AppActionCreator} from '../../reducer/app/app.js';
 import CardList from '../card-list/card-list.jsx';
 import CityList from '../city-list/city-list.jsx';
-import {getOffersByCity} from '../../utils/offers.js';
 import PropTypes from 'prop-types';
 import {OFFER_PROP_TYPES} from '../../shared/types.js';
+import {getCityOffers} from '../../reducer/data/selectors.js';
+import {getAllCities, getCurrentCity} from '../../reducer/app/selectors.js';
 
 Main.propTypes = {
   currentCity: PropTypes.string.isRequired,
@@ -15,8 +16,7 @@ Main.propTypes = {
 };
 
 function Main(props) {
-  const {currentCity, offers, allCities, onCityLinkClick} = props;
-  const currentCityOffers = getOffersByCity(currentCity, offers);
+  const {currentCity, offers: currentCityOffers, allCities, onCityLinkClick} = props;
 
   return (
     <React.Fragment>
@@ -61,16 +61,16 @@ function Main(props) {
 
 const mapStateToProps = (state) => {
   return {
-    currentCity: state.city,
-    offers: state.offers,
-    allCities: state.allCities,
+    currentCity: getCurrentCity(state),
+    offers: getCityOffers(state),
+    allCities: getAllCities(state),
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onCityLinkClick(city) {
-      dispatch(ActionCreator.changeCity(city));
+      dispatch(AppActionCreator.changeCity(city));
     }
   };
 };
