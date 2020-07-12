@@ -5,18 +5,47 @@ import CardList from '../card-list/card-list.jsx';
 import CityList from '../city-list/city-list.jsx';
 import PropTypes from 'prop-types';
 import {OFFER_PROP_TYPES} from '../../shared/types.js';
-import {getCityOffers} from '../../reducer/data/selectors.js';
+import {getCityOffers, getStatus} from '../../reducer/data/selectors.js';
 import {getAllCities, getCurrentCity} from '../../reducer/app/selectors.js';
+import {ConnectStatus} from '../../reducer/data/data.js';
 
 Main.propTypes = {
   currentCity: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(OFFER_PROP_TYPES).isRequired,
   allCities: PropTypes.arrayOf(PropTypes.string).isRequired,
   onCityLinkClick: PropTypes.func.isRequired,
+  status: PropTypes.string.isRequired,
 };
 
 function Main(props) {
-  const {currentCity, offers: currentCityOffers, allCities, onCityLinkClick} = props;
+  const {status, currentCity, offers: currentCityOffers, allCities, onCityLinkClick} = props;
+
+  const getScreen = () => {
+    switch (status) {
+      case ConnectStatus.OK:
+        return (
+          <React.Fragment>
+            <CityList
+              currentCity={currentCity}
+              allCities={allCities}
+              onCityLinkClick={onCityLinkClick}
+            />
+            <CardList
+              city={currentCity}
+              offers={currentCityOffers}
+            />
+          </React.Fragment>
+        );
+      case ConnectStatus.LOADING:
+        return (
+          <p className="property__name">Loading...</p>
+        );
+      default:
+        return (
+          <p className="property__name">Oops. Something went wrong. Try reloading the page...</p>
+        );
+    }
+  };
 
   return (
     <React.Fragment>
@@ -44,15 +73,7 @@ function Main(props) {
           </div>
         </header>
         <main className="page__main page__main--index">
-          <CityList
-            currentCity={currentCity}
-            allCities={allCities}
-            onCityLinkClick={onCityLinkClick}
-          />
-          <CardList
-            city={currentCity}
-            offers={currentCityOffers}
-          />
+          {getScreen()}
         </main>
       </div>
     </React.Fragment>
@@ -63,6 +84,7 @@ const mapStateToProps = (state) => {
   return {
     currentCity: getCurrentCity(state),
     offers: getCityOffers(state),
+    status: getStatus(state),
     allCities: getAllCities(state),
   };
 };

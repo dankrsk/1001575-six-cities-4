@@ -5,7 +5,7 @@ import App from '../app/app.jsx';
 import configureStore from 'redux-mock-store';
 import {mock} from '../../shared/test-mocks.js';
 import {getCitiesFromOffers} from '../../utils/offers.js';
-import NameSpace from '../../reducer/name-space.js';
+import NameSpace from '../../const.js';
 
 const mockStore = configureStore([]);
 
@@ -14,6 +14,7 @@ describe(`Snapshots for App`, () => {
     const store = mockStore({
       [NameSpace.DATA]: {
         offers: mock.offers,
+        status: `OK`,
       },
       [NameSpace.APP]: {
         city: `Paris`,

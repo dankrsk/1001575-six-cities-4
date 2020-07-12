@@ -1,4 +1,4 @@
-import NameSpace from '../name-space.js';
+import NameSpace from '../../const.js';
 
 export const getCurrentCity = (state) => {
   return state[NameSpace.APP].city;

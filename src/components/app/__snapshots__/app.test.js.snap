@@ -119,7 +119,7 @@ exports[`Snapshots for App App component 1`] = `
       className="cities"
     >
       <div
-        classNameName="cities__places-container cities__places-container--empty container"
+        className="cities__places-container cities__places-container--empty container"
       >
         <section
           className="cities__no-places"

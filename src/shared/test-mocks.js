@@ -86,5 +86,47 @@ export const mock = {
       title: `Beautiful & luxurious apartment at great location`,
       type: `Room`,
     },
-  ]
+  ],
+  rawOffers: [
+    {
+      bedrooms: 3,
+      city: {
+        location: {
+          latitude: 52.370216,
+          longitude: 4.895168,
+          zoom: 10,
+        },
+        name: `Amsterdam`,
+      },
+      description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
+      goods: [`Heating`, `Kitchen`],
+      host: {
+        // eslint-disable-next-line
+        avatar_url: imgUrl,
+        id: 1,
+        // eslint-disable-next-line
+        is_pro: true,
+        name: `Dan`,
+      },
+      id: 1,
+      images: [imgUrl, imgUrl],
+      // eslint-disable-next-line
+      is_favorite: true,
+      // eslint-disable-next-line
+      is_premium: true,
+      location: {
+        latitude: 52.35514938496378,
+        longitude: 4.673877537499948,
+        zoom: 10,
+      },
+      // eslint-disable-next-line
+      max_adults: 4,
+      // eslint-disable-next-line
+      preview_image: imgUrl,
+      price: 100,
+      rating: 1,
+      title: `Beautiful & luxurious apartment at great location`,
+      type: `House`,
+    },
+  ],
 };
