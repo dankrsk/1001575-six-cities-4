@@ -20,7 +20,7 @@ function Card(props) {
         onCardMouseOver(id);
       }}
       onMouseOut={() => {
-        onCardMouseOver(-1);
+        onCardMouseOver();
       }}
     >
       {isPremium && <div className="place-card__mark"><span>Premium</span></div>}

@@ -1,19 +1,14 @@
-import {getOffers} from './mocks/offers.js';
-import {extend} from './utils/common.js';
-import {getCitiesFromOffers} from './utils/offers.js';
-
-export const OFFERS_COUNT = 12;
-const initialOffers = getOffers(OFFERS_COUNT);
+import {extend} from '../../utils/common.js';
+import {getCitiesFromOffers} from '../../utils/offers.js';
 
 const initialState = {
-  city: `Paris`,
-  offers: initialOffers,
-  allCities: getCitiesFromOffers(initialOffers),
+  city: ``,
+  allCities: [],
 };
 
 export const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
-  GET_OFFERS: `GET_OFFERS`,
+  GET_ALL_CITIES: `GET_ALL_CITIES`,
 };
 
 export const ActionCreator = {
@@ -23,10 +18,10 @@ export const ActionCreator = {
       payload: city,
     };
   },
-  getOffers: () => {
+  getAllCities: (offers) => {
     return {
-      type: ActionType.GET_OFFERS,
-      payload: getOffers(OFFERS_COUNT),
+      type: ActionType.GET_ALL_CITIES,
+      payload: getCitiesFromOffers(offers),
     };
   },
 };
@@ -37,9 +32,9 @@ export const reducer = (state = initialState, action) => {
       return extend(state, {
         city: action.payload,
       });
-    case ActionType.GET_OFFERS:
+    case ActionType.GET_ALL_CITIES:
       return extend(state, {
-        offers: action.payload,
+        allCities: action.payload,
       });
     default:
       return state;

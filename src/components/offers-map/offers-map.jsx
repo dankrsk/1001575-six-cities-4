@@ -3,15 +3,6 @@ import leaflet from 'leaflet';
 import PropTypes from 'prop-types';
 import {OFFER_PROP_TYPES} from '../../shared/types.js';
 
-const CitiesCoordinates = {
-  Paris: [48.8534, 2.3488],
-  Cologne: [50.9333, 6.95],
-  Brussels: [50.8504, 4.34878],
-  Amsterdam: [52.38333, 4.9],
-  Hamburg: [53.5753, 10.0153],
-  Dusseldorf: [51.2217, 6.77616],
-};
-
 const LEAFLET_SETTINGS = {
   defaultIcon: leaflet.icon({
     iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png`,
@@ -21,7 +12,6 @@ const LEAFLET_SETTINGS = {
     iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-orange.png`,
     iconSize: [25, 41]
   }),
-  zoom: 12,
 };
 
 export default class OffersMap extends React.Component {
@@ -72,11 +62,12 @@ export default class OffersMap extends React.Component {
   }
 
   _createMap() {
-    this._city = this.props.city;
-    const city = CitiesCoordinates[this._city];
+    const props = this.props;
+    this._city = props.city;
+    const city = [props.offers[0].cityLocation.latitude, props.offers[0].cityLocation.longitude];
     this._map = leaflet.map(this._mapContainerRef.current, {
       center: city,
-      zoom: LEAFLET_SETTINGS.zoom,
+      zoom: props.offers[0].cityLocation.zoom,
       zoomControl: false,
       marker: true
     });
@@ -92,9 +83,10 @@ export default class OffersMap extends React.Component {
 
   _updateMap() {
     if (this._city !== this.props.city) {
+      const props = this.props;
       this._city = this.props.city;
-      const city = CitiesCoordinates[this._city];
-      this._map.setView(city, LEAFLET_SETTINGS.zoom);
+      const city = [props.offers[0].cityLocation.latitude, props.offers[0].cityLocation.longitude];
+      this._map.setView(city, props.offers[0].cityLocation.zoom);
 
       this._removeMarkers();
       this._renderMarkers();

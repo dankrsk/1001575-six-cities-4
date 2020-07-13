@@ -20,12 +20,12 @@ Array [
           className="locations__item"
         >
           <a
-            className="locations__item-link tabs__item tabs__item--active"
+            className="locations__item-link tabs__item"
             href="#"
             onClick={[Function]}
           >
             <span>
-              Paris
+              Amsterdam
             </span>
           </a>
         </li>
@@ -51,7 +51,7 @@ Array [
             onClick={[Function]}
           >
             <span>
-              Brussels
+              Berlin
             </span>
           </a>
         </li>
