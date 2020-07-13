@@ -31,3 +31,11 @@ export const OFFER_PROP_TYPES = PropTypes.shape(
     }
 );
 
+export const AUTH_INFO_PROP_TYPES = PropTypes.shape({
+  avatarUrl: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  isPro: PropTypes.bool.isRequired,
+  name: PropTypes.string.isRequired,
+});
+
