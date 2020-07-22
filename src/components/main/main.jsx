@@ -4,21 +4,29 @@ import {ActionCreator as AppActionCreator} from '../../reducer/app/app.js';
 import CardList from '../card-list/card-list.jsx';
 import CityList from '../city-list/city-list.jsx';
 import PropTypes from 'prop-types';
-import {OFFER_PROP_TYPES} from '../../shared/types.js';
+import {OFFER_PROP_TYPES, AUTH_INFO_PROP_TYPES} from '../../shared/types.js';
 import {getCityOffers, getStatus} from '../../reducer/data/selectors.js';
 import {getAllCities, getCurrentCity} from '../../reducer/app/selectors.js';
-import {ConnectStatus} from '../../reducer/data/data.js';
+import {Operation as DataOperation, ConnectStatus} from '../../reducer/data/data.js';
+import {getAuthorizationStatus, getAuthInfo} from '../../reducer/user/selectors.js';
+import {AuthorizationStatus} from '../../reducer/user/user.js';
+import {AppRoutes} from '../../const.js';
+import {Link} from 'react-router-dom';
 
 Main.propTypes = {
   currentCity: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(OFFER_PROP_TYPES).isRequired,
   allCities: PropTypes.arrayOf(PropTypes.string).isRequired,
   onCityLinkClick: PropTypes.func.isRequired,
+  onFavoriteButtonClick: PropTypes.func.isRequired,
   status: PropTypes.string.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
+  authInfo: AUTH_INFO_PROP_TYPES,
 };
 
 function Main(props) {
-  const {status, currentCity, offers: currentCityOffers, allCities, onCityLinkClick} = props;
+  const {authInfo, authorizationStatus, status, currentCity, offers: currentCityOffers, allCities, onCityLinkClick, onFavoriteButtonClick} = props;
+  const isAuth = authorizationStatus === AuthorizationStatus.AUTH;
 
   const getScreen = () => {
     switch (status) {
@@ -33,6 +41,7 @@ function Main(props) {
             <CardList
               city={currentCity}
               offers={currentCityOffers}
+              onFavoriteButtonClick={onFavoriteButtonClick}
             />
           </React.Fragment>
         );
@@ -61,11 +70,19 @@ function Main(props) {
               <nav className="header__nav">
                 <ul className="header__nav-list">
                   <li className="header__nav-item user">
-                    <a className="header__nav-link header__nav-link--profile" href="#">
+                    <Link
+                      className="header__nav-link header__nav-link--profile"
+                      to={isAuth ? AppRoutes.FAVORITES : AppRoutes.LOGIN}
+                    >
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
-                      <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    </a>
+                      <span className="header__user-name user__name">
+                        {isAuth
+                          ? authInfo.email
+                          : `Sign In`
+                        }
+                      </span>
+                    </Link>
                   </li>
                 </ul>
               </nav>
@@ -86,6 +103,8 @@ const mapStateToProps = (state) => {
     offers: getCityOffers(state),
     status: getStatus(state),
     allCities: getAllCities(state),
+    authorizationStatus: getAuthorizationStatus(state),
+    authInfo: getAuthInfo(state),
   };
 };
 
@@ -93,7 +112,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onCityLinkClick(city) {
       dispatch(AppActionCreator.changeCity(city));
-    }
+    },
+    onFavoriteButtonClick(offerId) {
+      dispatch(DataOperation.updateFavoriteField(offerId));
+    },
   };
 };
 

@@ -1,5 +1,6 @@
 import {extend} from '../../utils/common.js';
 import {getAdaptedOffer} from '../../adapter.js';
+import NameSpace from '../../const.js';
 
 export const ConnectStatus = {
   ERROR: `ERROR`,
@@ -14,6 +15,7 @@ const initialState = {
 
 export const ActionType = {
   LOAD_OFFERS: `LOAD_OFFERS`,
+  UPDATE_OFFER: `UPDATE_OFFERS`,
   CHANGE_STATUS: `CHANGE_STATUS`,
 };
 
@@ -22,6 +24,12 @@ export const ActionCreator = {
     return {
       type: ActionType.LOAD_OFFERS,
       payload: offers,
+    };
+  },
+  updateOffer: (offer) => {
+    return {
+      type: ActionType.UPDATE_OFFER,
+      payload: offer,
     };
   },
   changeStatus: (status) => {
@@ -43,6 +51,19 @@ export const Operation = {
                 dispatch(ActionCreator.changeStatus(ConnectStatus.OK));
               });
   },
+  updateFavoriteField: (offerId) => {
+    return (dispatch, getState, api, id = offerId) => {
+      const offers = getState()[NameSpace.DATA].offers;
+      const offersIndex = offers.findIndex((offer) => {
+        return offer.id === id;
+      });
+      return api.post(`/favorite/${offerId}/${offers[offersIndex].isFavorite ? 0 : 1}`)
+                .then((response) => {
+                  const newOffer = getAdaptedOffer(response.data);
+                  dispatch(ActionCreator.updateOffer(newOffer));
+                });
+    };
+  },
 };
 
 export const reducer = (state = initialState, action) => {
@@ -50,6 +71,15 @@ export const reducer = (state = initialState, action) => {
     case ActionType.LOAD_OFFERS:
       return extend(state, {
         offers: action.payload,
+      });
+    case ActionType.UPDATE_OFFER:
+      const newOffer = action.payload;
+      const index = state.offers.findIndex((offer) => {
+        return offer.id === newOffer.id;
+      });
+      const newOffers = [].concat(state.offers.slice(0, index), newOffer, state.offers.slice(index + 1));
+      return extend(state, {
+        offers: newOffers,
       });
     case ActionType.CHANGE_STATUS:
       return extend(state, {

@@ -129,4 +129,20 @@ export const mock = {
       type: `House`,
     },
   ],
+  authInfo: {
+    avatarUrl: imgUrl,
+    email: `foo@bar.com`,
+    id: 1,
+    isPro: true,
+    name: `Adam Smith`,
+  },
+  rawAuthInfo: {
+    // eslint-disable-next-line
+    avatar_url: imgUrl,
+    email: `foo@bar.com`,
+    id: 1,
+    // eslint-disable-next-line
+    is_pro: true,
+    name: `Adam Smith`,
+  }
 };

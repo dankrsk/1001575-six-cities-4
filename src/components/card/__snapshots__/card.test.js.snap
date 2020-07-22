@@ -50,7 +50,8 @@ exports[`Snapshots for Card Card component should render 1 card for mock offer 1
         </span>
       </div>
       <button
-        className="place-card__bookmark-button button"
+        className="place-card__bookmark-button button place-card__bookmark-button--active"
+        onClick={[Function]}
         type="button"
       >
         <svg

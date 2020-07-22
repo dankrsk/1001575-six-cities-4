@@ -20,6 +20,9 @@ describe(`Snapshots for App`, () => {
         city: `Paris`,
         allCities: getCitiesFromOffers(mock.offers),
       },
+      [NameSpace.USER]: {
+        authorizationStatus: `NO_AUTH`,
+      },
     });
 
     const tree = renderer

@@ -9,6 +9,7 @@ describe(`Snapshots for CardLst`, () => {
       .create(<CardList
         city={`Paris`}
         offers={mock.offers}
+        onFavoriteButtonClick={() => {}}
       />)
       .toJSON();
 

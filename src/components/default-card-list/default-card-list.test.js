@@ -11,6 +11,7 @@ describe(`Snapshots for DefaultCardList`, () => {
         offers={mock.offers}
         activeCardId={1}
         handleCardAction={() => {}}
+        onFavoriteButtonClick={() => {}}
       />)
       .toJSON();
 
