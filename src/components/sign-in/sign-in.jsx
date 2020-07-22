@@ -1,8 +1,15 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {AppRoutes} from '../../const.js';
+import PropTypes from 'prop-types';
+
+SignIn.propTypes = {
+  onLoginFormSubmit: PropTypes.func.isRequired,
+};
 
 function SignIn(props) {
+  const {onLoginFormSubmit} = props;
+
   return (
     <div className="page page--gray page--login">
       <header className="header">
@@ -32,7 +39,14 @@ function SignIn(props) {
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
-            <form className="login__form form" action="#" method="post">
+            <form className="login__form form" action="#" method="post" onSubmit={(evt) => {
+              evt.preventDefault();
+              const formData = new FormData(evt.target);
+              onLoginFormSubmit({
+                login: formData.get(`email`),
+                password: formData.get(`password`),
+              });
+            }}>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
                 <input className="login__input form__input" type="email" name="email" placeholder="Email" required="" />

@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import {OFFER_PROP_TYPES, AUTH_INFO_PROP_TYPES} from '../../shared/types.js';
 import {getCityOffers, getStatus} from '../../reducer/data/selectors.js';
 import {getAllCities, getCurrentCity} from '../../reducer/app/selectors.js';
-import {ConnectStatus} from '../../reducer/data/data.js';
+import {Operation as DataOperation, ConnectStatus} from '../../reducer/data/data.js';
 import {getAuthorizationStatus, getAuthInfo} from '../../reducer/user/selectors.js';
 import {AuthorizationStatus} from '../../reducer/user/user.js';
 import {AppRoutes} from '../../const.js';
@@ -18,13 +18,14 @@ Main.propTypes = {
   offers: PropTypes.arrayOf(OFFER_PROP_TYPES).isRequired,
   allCities: PropTypes.arrayOf(PropTypes.string).isRequired,
   onCityLinkClick: PropTypes.func.isRequired,
+  onFavoriteButtonClick: PropTypes.func.isRequired,
   status: PropTypes.string.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
-  authInfo: AUTH_INFO_PROP_TYPES.isRequired,
+  authInfo: AUTH_INFO_PROP_TYPES,
 };
 
 function Main(props) {
-  const {authInfo, authorizationStatus, status, currentCity, offers: currentCityOffers, allCities, onCityLinkClick} = props;
+  const {authInfo, authorizationStatus, status, currentCity, offers: currentCityOffers, allCities, onCityLinkClick, onFavoriteButtonClick} = props;
   const isAuth = authorizationStatus === AuthorizationStatus.AUTH;
 
   const getScreen = () => {
@@ -40,6 +41,7 @@ function Main(props) {
             <CardList
               city={currentCity}
               offers={currentCityOffers}
+              onFavoriteButtonClick={onFavoriteButtonClick}
             />
           </React.Fragment>
         );
@@ -110,7 +112,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onCityLinkClick(city) {
       dispatch(AppActionCreator.changeCity(city));
-    }
+    },
+    onFavoriteButtonClick(offerId) {
+      dispatch(DataOperation.updateFavoriteField(offerId));
+    },
   };
 };
 

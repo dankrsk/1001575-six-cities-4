@@ -19,7 +19,7 @@ export const ActionType = {
 export const ActionCreator = {
   changeAuthorizationStatus: (status) => {
     return {
-      type: ActionType.CHANGE_STATUS,
+      type: ActionType.CHANGE_AUTH_STATUS,
       payload: status,
     };
   },
@@ -34,7 +34,8 @@ export const ActionCreator = {
 export const Operation = {
   checkAuth: () => (dispatch, getState, api) => {
     return api.get(`/login`)
-              .then(() => {
+              .then((response) => {
+                dispatch(ActionCreator.loadAuthInfo(getAdaptedAuthInfo(response.data)));
                 dispatch(ActionCreator.changeAuthorizationStatus(AuthorizationStatus.AUTH));
               })
               .catch((err) => {
@@ -57,7 +58,7 @@ export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.CHANGE_AUTH_STATUS:
       return extend(state, {
-        status: action.payload,
+        authorizationStatus: action.payload,
       });
     case ActionType.LOAD_AUTH_INFO:
       return extend(state, {

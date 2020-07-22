@@ -9,6 +9,7 @@ describe(`Snapshots for Card`, () => {
       .create(<Card
         offer={mock.offers[0]}
         onCardMouseOver={() => {}}
+        onFavoriteButtonClick={() => {}}
       />)
       .toJSON();
 

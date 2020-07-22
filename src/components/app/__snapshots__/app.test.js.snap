@@ -39,7 +39,8 @@ exports[`Snapshots for App App component 1`] = `
             >
               <a
                 className="header__nav-link header__nav-link--profile"
-                href="#"
+                href="/login"
+                onClick={[Function]}
               >
                 <div
                   className="header__avatar-wrapper user__avatar-wrapper"
@@ -47,7 +48,7 @@ exports[`Snapshots for App App component 1`] = `
                 <span
                   className="header__user-name user__name"
                 >
-                  Oliver.conner@gmail.com
+                  Sign In
                 </span>
               </a>
             </li>

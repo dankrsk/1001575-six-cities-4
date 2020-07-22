@@ -128,7 +128,8 @@ exports[`Snapshots for CardLst CardList component 1`] = `
                 </span>
               </div>
               <button
-                className="place-card__bookmark-button button"
+                className="place-card__bookmark-button button place-card__bookmark-button--active"
+                onClick={[Function]}
                 type="button"
               >
                 <svg
@@ -232,7 +233,8 @@ exports[`Snapshots for CardLst CardList component 1`] = `
                 </span>
               </div>
               <button
-                className="place-card__bookmark-button button"
+                className="place-card__bookmark-button button place-card__bookmark-button--active"
+                onClick={[Function]}
                 type="button"
               >
                 <svg
@@ -336,7 +338,8 @@ exports[`Snapshots for CardLst CardList component 1`] = `
                 </span>
               </div>
               <button
-                className="place-card__bookmark-button button"
+                className="place-card__bookmark-button button place-card__bookmark-button--active"
+                onClick={[Function]}
                 type="button"
               >
                 <svg

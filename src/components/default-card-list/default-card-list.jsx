@@ -9,10 +9,11 @@ DefaultCardList.propTypes = {
   offers: PropTypes.arrayOf(OFFER_PROP_TYPES).isRequired,
   activeCardId: PropTypes.number.isRequired,
   handleCardAction: PropTypes.func.isRequired,
+  onFavoriteButtonClick: PropTypes.func.isRequired,
 };
 
 function DefaultCardList(props) {
-  const {city, offers, handleCardAction: onCardMouseOver, activeCardId} = props;
+  const {city, offers, handleCardAction: onCardMouseOver, activeCardId, onFavoriteButtonClick} = props;
 
   return (
     <div className="cities__places-container container">
@@ -41,6 +42,7 @@ function DefaultCardList(props) {
                 key={offer.id}
                 offer={offer}
                 onCardMouseOver={onCardMouseOver}
+                onFavoriteButtonClick={onFavoriteButtonClick}
               />
             );
           })}

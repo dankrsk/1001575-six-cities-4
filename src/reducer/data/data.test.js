@@ -33,10 +33,31 @@ describe(`Data reducer tests`, () => {
     });
   });
 
+  it(`Reducer should update offer`, () => {
+    const newOffer = Object.assign({}, offers[0], {
+      isFavorite: !offers[0].isFavorite,
+    });
+
+    expect(reducer({
+      offers: [offers[0], offers[1], offers[3]],
+      status: `OK`,
+    }, {
+      type: ActionType.UPDATE_OFFER,
+      payload: newOffer,
+    })).toEqual({
+      offers: [newOffer, offers[1], offers[3]],
+      status: `OK`,
+    });
+  });
+
   it(`ActionCreators should return correct actions`, () => {
     expect(ActionCreator.loadOffers(offers)).toEqual({
       type: ActionType.LOAD_OFFERS,
       payload: offers,
+    });
+    expect(ActionCreator.updateOffer(offers[0])).toEqual({
+      type: ActionType.UPDATE_OFFER,
+      payload: offers[0],
     });
     expect(ActionCreator.changeStatus(`OK`)).toEqual({
       type: ActionType.CHANGE_STATUS,
@@ -64,6 +85,33 @@ describe(`Data reducer tests`, () => {
         expect(dispatch).toHaveBeenNthCalledWith(2, {
           type: ActionType.CHANGE_STATUS,
           payload: `OK`,
+        });
+      });
+  });
+
+  it(`Operation should change favorite field`, () => {
+    const api = createAPI();
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const updaterFavoriteField = Operation.updateFavoriteField(1);
+
+    apiMock
+      .onPost(`/favorite/1/0`)
+      // eslint-disable-next-line
+      .reply(200, Object.assign({}, rawOffers[0], {is_favorite: false}));
+
+    return updaterFavoriteField(dispatch, () => {
+      return {
+        DATA: {
+          offers: [offers[0]],
+        },
+      };
+    }, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.UPDATE_OFFER,
+          payload: Object.assign({}, offers[0], {isFavorite: false}),
         });
       });
   });
