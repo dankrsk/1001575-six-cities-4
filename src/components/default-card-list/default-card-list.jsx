@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Card from '../card/card.jsx';
-import OffersMap from '../offers-map/offers-map.jsx';
 import {OFFER_PROP_TYPES} from '../../shared/types.js';
 
 DefaultCardList.propTypes = {

@@ -111,4 +111,5 @@ OffersMap.propTypes = {
   offers: PropTypes.arrayOf(OFFER_PROP_TYPES).isRequired,
   city: PropTypes.string.isRequired,
   activeCardId: PropTypes.number.isRequired,
+  isNearPlaces: PropTypes.bool.isRequired,
 };
