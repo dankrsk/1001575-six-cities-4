@@ -56,7 +56,7 @@ export default class OffersMap extends React.Component {
     if (marker) {
       marker.setIcon(LEAFLET_SETTINGS.activeIcon);
       this._activeMarker = marker;
-    } else {
+    } else if (this._activeMarker) {
       this._activeMarker.setIcon(LEAFLET_SETTINGS.defaultIcon);
     }
   }
@@ -96,10 +96,11 @@ export default class OffersMap extends React.Component {
   }
 
   render() {
+    const customClass = this.props.isNearPlaces ? `property` : `cities`;
     return (
       <section
         ref={this._mapContainerRef}
-        className="cities__map map"
+        className={`${customClass}__map map`}
       >
       </section>
     );

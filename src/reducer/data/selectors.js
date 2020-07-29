@@ -19,3 +19,16 @@ export const getCityOffers = createSelector(
 export const getStatus = (state) => {
   return state[NameSpace.DATA].status;
 };
+
+export const getRawComments = (state) => {
+  return state[NameSpace.DATA].comments;
+};
+
+export const getComments = createSelector(
+    getRawComments,
+    (comments) => {
+      return comments.sort((a, b) => {
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+      });
+    }
+);

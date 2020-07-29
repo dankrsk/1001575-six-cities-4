@@ -1,22 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {OFFER_PROP_TYPES} from '../../shared/types.js';
+import {getCalculatedRating} from '../../utils/offers.js';
+import {Link} from 'react-router-dom';
+import {AppRoutes} from '../../const.js';
 
 Card.propTypes = {
   offer: OFFER_PROP_TYPES.isRequired,
   onCardMouseOver: PropTypes.func.isRequired,
   onFavoriteButtonClick: PropTypes.func.isRequired,
+  isNearPlaces: PropTypes.bool.isRequired,
 };
 
-const MULTIPLIER_FOR_RATING = 20;
-
 function Card(props) {
-  const {offer: {id, type, title, price, rating, isPremium, photo, isFavorite}, onCardMouseOver, onFavoriteButtonClick} = props;
-  const calculatedRating = MULTIPLIER_FOR_RATING * rating;
+  const {offer: {id, type, title, price, rating, isPremium, photo, isFavorite}, onCardMouseOver, onFavoriteButtonClick, isNearPlaces} = props;
+  const calculatedRating = getCalculatedRating(rating);
+  const customClassForArticle = isNearPlaces ? `near-places__card` : `cities__place-card`;
+  const customClassForImgWrapper = isNearPlaces ? `near-places__image-wrapper` : `cities__image-wrapper`;
 
   return (
     <article
-      className="cities__place-card place-card"
+      className={`place-card ${customClassForArticle}`}
       onMouseOver={() => {
         onCardMouseOver(id);
       }}
@@ -25,8 +29,8 @@ function Card(props) {
       }}
     >
       {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
-      <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
+      <div className={`place-card__image-wrapper ${customClassForImgWrapper}`}>
+        <a>
           <img className="place-card__image" src={photo} width="260" height="200" alt="Place image" />
         </a>
       </div>
@@ -56,7 +60,9 @@ function Card(props) {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={`${AppRoutes.OFFER}/${id}`}>
+            {title}
+          </Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

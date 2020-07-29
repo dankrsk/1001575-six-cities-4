@@ -34,3 +34,18 @@ export const getAdaptedAuthInfo = (authInfo) => {
     name: authInfo.name,
   };
 };
+
+export const getAdaptedComment = (comment) => {
+  return {
+    comment: comment.comment,
+    date: comment.date,
+    id: comment.id,
+    rating: comment.rating,
+    user: {
+      avatarUrl: comment.user.avatar_url,
+      id: comment.user.id,
+      isPro: comment.user.is_pro,
+      name: comment.user.name,
+    }
+  };
+};
