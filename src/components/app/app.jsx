@@ -58,16 +58,10 @@ function App(props) {
           {getScreen(status, <MainWrapped onFavoriteButtonClick={onFavoriteButtonClick} />)}
         </Route>
         <Route exact path={AppRoutes.LOGIN}>
-          {getScreen(
-              status,
-              () => {
-                if (checkAuth(authorizationStatus)) {
-                  return <Redirect to={AppRoutes.MAIN} />;
-                } else {
-                  return <SignIn onLoginFormSubmit={onLoginFormSubmit} />;
-                }
-              }
-          )}
+          {checkAuth(authorizationStatus)
+            ? <Redirect to={AppRoutes.MAIN} />
+            : <SignIn onLoginFormSubmit={onLoginFormSubmit} />
+          }
         </Route>
         <Route
           exact path={`${AppRoutes.OFFER}/:id`}
