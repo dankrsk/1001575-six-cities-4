@@ -39,8 +39,8 @@ const store = createStore(
 store.dispatch(DataOperation.loadOffers())
       .then(() => store.dispatch(AppActionCreator.getAllCities(store.getState()[NameSpace.DATA].offers)))
       .then((cities) => store.dispatch(AppActionCreator.changeCity(cities.payload[0])))
+      .then(() => store.dispatch(UserOperation.checkAuth()))
       .then(() => store.dispatch(DataActionCreator.changeStatus(ConnectStatus.OK)));
-store.dispatch(UserOperation.checkAuth());
 
 ReactDOM.render(
     <Provider store={store}>

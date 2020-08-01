@@ -22,6 +22,7 @@ export default class OffersMap extends React.Component {
     this._city = null;
     this._activeMarker = null;
     this._renderedMarkers = null;
+    this._offers = null;
 
     this._mapContainerRef = React.createRef();
   }
@@ -53,17 +54,20 @@ export default class OffersMap extends React.Component {
 
   _renderActiveMarker() {
     const marker = this._renderedMarkers.get(this.props.activeCardId);
+    if (this._activeMarker) {
+      this._activeMarker.setIcon(LEAFLET_SETTINGS.defaultIcon);
+    }
     if (marker) {
       marker.setIcon(LEAFLET_SETTINGS.activeIcon);
       this._activeMarker = marker;
-    } else if (this._activeMarker) {
-      this._activeMarker.setIcon(LEAFLET_SETTINGS.defaultIcon);
     }
   }
 
   _createMap() {
     const props = this.props;
     this._city = props.city;
+    this._offers = props.offers;
+
     const city = [props.offers[0].cityLocation.latitude, props.offers[0].cityLocation.longitude];
     this._map = leaflet.map(this._mapContainerRef.current, {
       center: city,
@@ -79,10 +83,11 @@ export default class OffersMap extends React.Component {
       .addTo(this._map);
 
     this._renderMarkers();
+    this._renderActiveMarker();
   }
 
   _updateMap() {
-    if (this._city !== this.props.city) {
+    if (this._city !== this.props.city || this.props.offers !== this._offers) {
       const props = this.props;
       this._city = this.props.city;
       const city = [props.offers[0].cityLocation.latitude, props.offers[0].cityLocation.longitude];
@@ -90,6 +95,7 @@ export default class OffersMap extends React.Component {
 
       this._removeMarkers();
       this._renderMarkers();
+      this._renderActiveMarker();
     } else {
       this._renderActiveMarker();
     }

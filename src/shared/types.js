@@ -44,11 +44,11 @@ export const COMMENTS_PROP_TYPES = PropTypes.shape({
   date: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   rating: PropTypes.number.isRequired,
-  user: {
+  user: PropTypes.shape({
     avatarUrl: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
     isPro: PropTypes.bool.isRequired,
     name: PropTypes.string.isRequired,
-  }
+  }),
 });
 

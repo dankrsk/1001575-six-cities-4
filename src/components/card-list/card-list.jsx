@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {OFFER_PROP_TYPES} from '../../shared/types.js';
 import EmptyCardList from '../empty-card-list/empty-card-list.jsx';
 import DefaultCardList from '../default-card-list/default-card-list.jsx';
+import {AppRoutes} from '../../const.js';
 
 CardList.propTypes = {
   city: PropTypes.string.isRequired,
@@ -19,7 +20,7 @@ function CardList(props) {
       case 0:
         return <EmptyCardList city={city} />;
       default:
-        return <DefaultCardList offers={offers} onFavoriteButtonClick={onFavoriteButtonClick} onCardMouseOver={onCardMouseOver} isNearPlaces={false} />;
+        return <DefaultCardList offers={offers} onFavoriteButtonClick={onFavoriteButtonClick} onCardMouseOver={onCardMouseOver} pageName={AppRoutes.MAIN} />;
     }
   };
 

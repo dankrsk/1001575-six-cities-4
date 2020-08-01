@@ -7,12 +7,12 @@ DefaultCardList.propTypes = {
   offers: PropTypes.arrayOf(OFFER_PROP_TYPES).isRequired,
   onFavoriteButtonClick: PropTypes.func.isRequired,
   onCardMouseOver: PropTypes.func.isRequired,
-  isNearPlaces: PropTypes.bool.isRequired,
+  pageName: PropTypes.string.isRequired,
 };
 
 function DefaultCardList(props) {
-  const {offers, onFavoriteButtonClick, onCardMouseOver, isNearPlaces} = props;
-  const customClass = isNearPlaces ? `near-places__list` : `cities__places-list tabs__content`;
+  const {offers, onFavoriteButtonClick, onCardMouseOver, pageName} = props;
+  const customClass = pageName ? `near-places__list` : `cities__places-list tabs__content`;
 
   return (
     <div className={`places__list ${customClass}`}>
@@ -23,7 +23,7 @@ function DefaultCardList(props) {
             offer={offer}
             onCardMouseOver={onCardMouseOver}
             onFavoriteButtonClick={onFavoriteButtonClick}
-            isNearPlaces={isNearPlaces}
+            pageName={pageName}
           />
         );
       })}

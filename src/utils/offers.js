@@ -1,3 +1,5 @@
+import {SortType} from '../reducer/app/app.js';
+
 const CITIES_COUNT = 6;
 const MULTIPLIER_FOR_RATING = 20;
 
@@ -34,5 +36,18 @@ export const getType = (str) => {
       return `Private Room`;
     default:
       return str[0].toUpperCase() + str.slice(1);
+  }
+};
+
+export const getSortType = (sortType) => {
+  switch (sortType) {
+    case SortType.LOW_TO_HIGH:
+      return `Price: low to high`;
+    case SortType.HIGH_TO_LOW:
+      return `Price: high to low`;
+    case SortType.TOP_RATED_FIRST:
+      return `Top rated first`;
+    default:
+      return `Popular`;
   }
 };

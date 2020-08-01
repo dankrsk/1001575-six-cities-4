@@ -26,4 +26,16 @@ export const Months = [
   `December`,
 ];
 
+export const StringRating = [
+  `terribly`,
+  `badly`,
+  `not bad`,
+  `good`,
+  `perfect`,
+];
+
+export const ButtonsCodes = {
+  ENTER: 13,
+};
+
 export default NameSpace;
