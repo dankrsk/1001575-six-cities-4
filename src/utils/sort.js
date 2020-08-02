@@ -1,18 +1,18 @@
 import {SortType} from '../reducer/app/app.js';
 
-const lowHighSort = (offers) => {
+const getLowHighSort = (offers) => {
   return offers.sort((a, b) => {
     return a.price - b.price;
   });
 };
 
-const highLowSort = (offers) => {
+const getHighLowSort = (offers) => {
   return offers.sort((a, b) => {
     return b.price - a.price;
   });
 };
 
-const topRatedFirstSort = (offers) => {
+const getTopRatedFirstSort = (offers) => {
   return offers.sort((a, b) => {
     return b.rating - a.rating;
   });
@@ -21,11 +21,11 @@ const topRatedFirstSort = (offers) => {
 export const getSortedOffers = (offers, sortType) => {
   switch (sortType) {
     case SortType.LOW_TO_HIGH:
-      return lowHighSort(offers);
+      return getLowHighSort(offers);
     case SortType.HIGH_TO_LOW:
-      return highLowSort(offers);
+      return getHighLowSort(offers);
     case SortType.TOP_RATED_FIRST:
-      return topRatedFirstSort(offers);
+      return getTopRatedFirstSort(offers);
     default:
       return offers;
   }

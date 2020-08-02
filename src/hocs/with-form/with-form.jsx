@@ -21,23 +21,13 @@ const withForm = (Component) => {
     }
 
     _checkValidation() {
-      if (this._isRadioGroupChecked && this._isTextValid) {
-        this.setState({
-          isSubmitButtonDisabled: false,
-        });
-      } else {
-        this.setState({
-          isSubmitButtonDisabled: true,
-        });
-      }
+      this.setState({
+        isSubmitButtonDisabled: !(this._isRadioGroupChecked && this._isTextValid),
+      });
     }
 
     handleTextInputChange(evt) {
-      if (!evt.target.validationMessage) {
-        this._isTextValid = true;
-      } else {
-        this._isTextValid = false;
-      }
+      this._isTextValid = !evt.target.validationMessage;
       this._checkValidation();
     }
 

@@ -15,9 +15,11 @@ ReviewForm.propTypes = {
   isError: PropTypes.bool.isRequired,
 };
 
+const NUMBER_OF_RATING_STARS = 5;
+
 const getRatingInputs = (isAllFieldDisabled) => {
   const markup = [];
-  for (let i = 5; i > 0; i--) {
+  for (let i = NUMBER_OF_RATING_STARS; i > 0; i--) {
     markup.push(
         <React.Fragment key={i}>
           <input className="form__rating-input visually-hidden" name="rating" value={i} id={`${i}-stars`} type="radio" disabled={isAllFieldDisabled} required />
@@ -46,6 +48,30 @@ function ReviewForm(props) {
     isError,
   } = props;
 
+  const onFormSubmit = (evt) => {
+    evt.preventDefault();
+    evt.persist();
+    disableFormFields();
+
+    const formData = new FormData(evt.target);
+    onReviewFormSubmit(
+        offerId,
+        {
+          comment: formData.get(`review`),
+          rating: formData.get(`rating`),
+        },
+        () => {
+          evt.target.reset();
+          enableFormFields();
+          setError(false);
+        },
+        () => {
+          enableFormFields();
+          setError(true);
+        }
+    );
+  };
+
   return (
     <React.Fragment>
       {isError
@@ -58,29 +84,7 @@ function ReviewForm(props) {
           Oops. Something went wrong. Try to submit your comment again...
         </p>
       }
-      <form className="reviews__form form" action="#" method="post" onSubmit={(evt) => {
-        evt.preventDefault();
-        evt.persist();
-        disableFormFields();
-
-        const formData = new FormData(evt.target);
-        onReviewFormSubmit(
-            offerId,
-            {
-              comment: formData.get(`review`),
-              rating: formData.get(`rating`),
-            },
-            () => {
-              evt.target.reset();
-              enableFormFields();
-              setError(false);
-            },
-            () => {
-              enableFormFields();
-              setError(true);
-            }
-        );
-      }}>
+      <form className="reviews__form form" action="#" method="post" onSubmit={onFormSubmit}>
         <label className="reviews__label form__label" htmlFor="review">Your review</label>
         <div className="reviews__rating-form form__rating" onChange={(evt) => {
           onRadioGroupChange(evt);

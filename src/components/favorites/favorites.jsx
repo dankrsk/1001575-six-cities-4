@@ -51,17 +51,25 @@ const getItems = (offers, onFavoriteButtonClick) => {
 
 function Favorites(props) {
   const {authInfo, authorizationStatus, offers, onFavoriteButtonClick} = props;
+  const isEmpty = Object.keys(offers).length === 0;
 
   return (
     <div className="page">
       <Header authInfo={authInfo} isAuth={checkAuth(authorizationStatus)} />
-      <main className="page__main page__main--favorites">
+      <main className={`page__main page__main--favorites${isEmpty ? ` page__main--favorites-empty` : ``}`}>
         <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <ul className="favorites__list">
-              {getItems(offers, onFavoriteButtonClick)}
-            </ul>
+          <section className={`favorites${isEmpty ? ` favorites--empty` : ``}`}>
+            <h1 className={isEmpty ? `visually-hidden` : `favorites__title`}>{isEmpty ? `Favorites (empty)` : `Saved listing`}</h1>
+            {isEmpty
+              ? <div className="favorites__status-wrapper">
+                <b className="favorites__status">Nothing yet saved.</b>
+                <p className="favorites__status-description">Save properties to narrow down search or plan yor future trips.</p>
+              </div>
+              : <ul className="favorites__list">
+                {getItems(offers, onFavoriteButtonClick)}
+              </ul>
+            }
+
           </section>
         </div>
       </main>

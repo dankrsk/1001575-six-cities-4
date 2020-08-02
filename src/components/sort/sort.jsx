@@ -52,9 +52,7 @@ function Sort(props) {
       <span
         className="places__sorting-type"
         tabIndex="0"
-        onClick={() => {
-          onOpenButtonClick();
-        }}
+        onClick={onOpenButtonClick}
         onKeyDown={(evt) => {
           if (evt.keyCode === ButtonsCodes.ENTER) {
             onOpenButtonClick();

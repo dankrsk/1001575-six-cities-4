@@ -87,9 +87,9 @@ export default class OffersMap extends React.Component {
   }
 
   _updateMap() {
-    if (this._city !== this.props.city || this.props.offers !== this._offers) {
-      const props = this.props;
-      this._city = this.props.city;
+    const props = this.props;
+    if (this._city !== props.city || props.offers !== this._offers) {
+      this._city = props.city;
       const city = [props.offers[0].cityLocation.latitude, props.offers[0].cityLocation.longitude];
       this._map.setView(city, props.offers[0].cityLocation.zoom);
 
