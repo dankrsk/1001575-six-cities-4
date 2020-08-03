@@ -1,5 +1,5 @@
 import {extend} from '../../utils/common.js';
-import {getAdaptedOffer} from '../../adapter.js';
+import {getAdaptedOffer, getAdaptedComment} from '../../adapter.js';
 import NameSpace from '../../const.js';
 
 export const ConnectStatus = {
@@ -10,11 +10,15 @@ export const ConnectStatus = {
 
 const initialState = {
   offers: [],
+  comments: [],
+  nearPlaces: [],
   status: ConnectStatus.LOADING,
 };
 
 export const ActionType = {
   LOAD_OFFERS: `LOAD_OFFERS`,
+  LOAD_COMMENTS: `LOAD_COMMENTS`,
+  LOAD_NEAR_PLACES: `LOAD_NEAR_PLACES`,
   UPDATE_OFFER: `UPDATE_OFFERS`,
   CHANGE_STATUS: `CHANGE_STATUS`,
 };
@@ -24,6 +28,18 @@ export const ActionCreator = {
     return {
       type: ActionType.LOAD_OFFERS,
       payload: offers,
+    };
+  },
+  loadComments: (comments) => {
+    return {
+      type: ActionType.LOAD_COMMENTS,
+      payload: comments,
+    };
+  },
+  loadNearPlaces: (places) => {
+    return {
+      type: ActionType.LOAD_NEAR_PLACES,
+      payload: places,
     };
   },
   updateOffer: (offer) => {
@@ -48,8 +64,40 @@ export const Operation = {
                   return getAdaptedOffer(offer);
                 });
                 dispatch(ActionCreator.loadOffers(offers));
-                dispatch(ActionCreator.changeStatus(ConnectStatus.OK));
               });
+  },
+  loadComments: (offerId) => {
+    return (dispatch, getState, api, id = offerId) => {
+      return api.get(`/comments/${id}`)
+                .then((response) => {
+                  const comments = response.data.map((comment) => {
+                    return getAdaptedComment(comment);
+                  });
+                  dispatch(ActionCreator.loadComments(comments));
+                });
+    };
+  },
+  uploadComment: (offerId, commentData) => {
+    return (dispatch, getState, api, id = offerId, data = commentData) => {
+      return api.post(`/comments/${id}`, data)
+                .then((response) => {
+                  const comments = response.data.map((comment) => {
+                    return getAdaptedComment(comment);
+                  });
+                  dispatch(ActionCreator.loadComments(comments));
+                });
+    };
+  },
+  loadNearPlaces: (offerId) => {
+    return (dispatch, getState, api, id = offerId) => {
+      return api.get(`/hotels/${id}/nearby`)
+                .then((response) => {
+                  const places = response.data.map((place) => {
+                    return getAdaptedOffer(place);
+                  });
+                  dispatch(ActionCreator.loadNearPlaces(places));
+                });
+    };
   },
   updateFavoriteField: (offerId) => {
     return (dispatch, getState, api, id = offerId) => {
@@ -57,7 +105,7 @@ export const Operation = {
       const offersIndex = offers.findIndex((offer) => {
         return offer.id === id;
       });
-      return api.post(`/favorite/${offerId}/${offers[offersIndex].isFavorite ? 0 : 1}`)
+      return api.post(`/favorite/${id}/${offers[offersIndex].isFavorite ? 0 : 1}`)
                 .then((response) => {
                   const newOffer = getAdaptedOffer(response.data);
                   dispatch(ActionCreator.updateOffer(newOffer));
@@ -71,6 +119,14 @@ export const reducer = (state = initialState, action) => {
     case ActionType.LOAD_OFFERS:
       return extend(state, {
         offers: action.payload,
+      });
+    case ActionType.LOAD_COMMENTS:
+      return extend(state, {
+        comments: action.payload,
+      });
+    case ActionType.LOAD_NEAR_PLACES:
+      return extend(state, {
+        nearPlaces: action.payload,
       });
     case ActionType.UPDATE_OFFER:
       const newOffer = action.payload;

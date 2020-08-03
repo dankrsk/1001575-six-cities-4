@@ -5,13 +5,14 @@ import CardList from '../card-list/card-list.jsx';
 import CityList from '../city-list/city-list.jsx';
 import PropTypes from 'prop-types';
 import {OFFER_PROP_TYPES, AUTH_INFO_PROP_TYPES} from '../../shared/types.js';
-import {getCityOffers, getStatus} from '../../reducer/data/selectors.js';
-import {getAllCities, getCurrentCity} from '../../reducer/app/selectors.js';
-import {Operation as DataOperation, ConnectStatus} from '../../reducer/data/data.js';
+import {getCityOffers} from '../../reducer/data/selectors.js';
+import {getAllCities, getCurrentCity, getSortType} from '../../reducer/app/selectors.js';
 import {getAuthorizationStatus, getAuthInfo} from '../../reducer/user/selectors.js';
-import {AuthorizationStatus} from '../../reducer/user/user.js';
-import {AppRoutes} from '../../const.js';
-import {Link} from 'react-router-dom';
+import Header from '../header/header.jsx';
+import {checkAuth} from '../../utils/common.js';
+import OffersMap from '../offers-map/offers-map.jsx';
+import Sort from '../sort/sort.jsx';
+import withMenu from '../../hocs/with-menu/with-menu.jsx';
 
 Main.propTypes = {
   currentCity: PropTypes.string.isRequired,
@@ -19,78 +20,67 @@ Main.propTypes = {
   allCities: PropTypes.arrayOf(PropTypes.string).isRequired,
   onCityLinkClick: PropTypes.func.isRequired,
   onFavoriteButtonClick: PropTypes.func.isRequired,
-  status: PropTypes.string.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
   authInfo: AUTH_INFO_PROP_TYPES,
+  handleCardAction: PropTypes.func.isRequired,
+  activeCardId: PropTypes.number.isRequired,
+  sortType: PropTypes.string.isRequired,
+  onSortTypeChange: PropTypes.func.isRequired,
 };
 
-function Main(props) {
-  const {authInfo, authorizationStatus, status, currentCity, offers: currentCityOffers, allCities, onCityLinkClick, onFavoriteButtonClick} = props;
-  const isAuth = authorizationStatus === AuthorizationStatus.AUTH;
+const SortWrapped = withMenu(Sort);
 
-  const getScreen = () => {
-    switch (status) {
-      case ConnectStatus.OK:
-        return (
-          <React.Fragment>
-            <CityList
-              currentCity={currentCity}
-              allCities={allCities}
-              onCityLinkClick={onCityLinkClick}
-            />
-            <CardList
-              city={currentCity}
-              offers={currentCityOffers}
-              onFavoriteButtonClick={onFavoriteButtonClick}
-            />
-          </React.Fragment>
-        );
-      case ConnectStatus.LOADING:
-        return (
-          <p className="property__name">Loading...</p>
-        );
-      default:
-        return (
-          <p className="property__name">Oops. Something went wrong. Try reloading the page...</p>
-        );
-    }
-  };
+function Main(props) {
+  const {
+    authInfo,
+    authorizationStatus,
+    currentCity,
+    offers: currentCityOffers,
+    allCities,
+    onCityLinkClick,
+    onFavoriteButtonClick,
+    handleCardAction: onCardMouseOver,
+    activeCardId,
+    sortType,
+    onSortTypeChange,
+  } = props;
 
   return (
     <React.Fragment>
       <div className="page page--gray page--main">
-        <header className="header">
-          <div className="container">
-            <div className="header__wrapper">
-              <div className="header__left">
-                <a className="header__logo-link header__logo-link--active">
-                  <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
-                </a>
+        <Header authInfo={authInfo} isAuth={checkAuth(authorizationStatus)} />
+        <main className="page__main page__main--index">
+          <CityList
+            currentCity={currentCity}
+            allCities={allCities}
+            onCityLinkClick={onCityLinkClick}
+          />
+          <div className="cities">
+            <div className="cities__places-container container">
+              <section className="cities__places places">
+                <h2 className="visually-hidden">Places</h2>
+                <b className="places__found">{currentCityOffers.length} places to stay in {currentCity}</b>
+                <SortWrapped
+                  sortType={sortType}
+                  onSortTypeChange={onSortTypeChange}
+                />
+                <CardList
+                  city={currentCity}
+                  offers={currentCityOffers}
+                  onFavoriteButtonClick={onFavoriteButtonClick}
+                  onCardMouseOver={onCardMouseOver}
+                />
+              </section>
+              <div className="cities__right-section">
+                <OffersMap
+                  city={currentCity}
+                  offers={currentCityOffers}
+                  activeCardId={activeCardId}
+                  isNearPlaces={false}
+                />
               </div>
-              <nav className="header__nav">
-                <ul className="header__nav-list">
-                  <li className="header__nav-item user">
-                    <Link
-                      className="header__nav-link header__nav-link--profile"
-                      to={isAuth ? AppRoutes.FAVORITES : AppRoutes.LOGIN}
-                    >
-                      <div className="header__avatar-wrapper user__avatar-wrapper">
-                      </div>
-                      <span className="header__user-name user__name">
-                        {isAuth
-                          ? authInfo.email
-                          : `Sign In`
-                        }
-                      </span>
-                    </Link>
-                  </li>
-                </ul>
-              </nav>
             </div>
           </div>
-        </header>
-        <main className="page__main page__main--index">
-          {getScreen()}
         </main>
       </div>
     </React.Fragment>
@@ -101,10 +91,10 @@ const mapStateToProps = (state) => {
   return {
     currentCity: getCurrentCity(state),
     offers: getCityOffers(state),
-    status: getStatus(state),
     allCities: getAllCities(state),
     authorizationStatus: getAuthorizationStatus(state),
     authInfo: getAuthInfo(state),
+    sortType: getSortType(state),
   };
 };
 
@@ -113,8 +103,8 @@ const mapDispatchToProps = (dispatch) => {
     onCityLinkClick(city) {
       dispatch(AppActionCreator.changeCity(city));
     },
-    onFavoriteButtonClick(offerId) {
-      dispatch(DataOperation.updateFavoriteField(offerId));
+    onSortTypeChange(sortType) {
+      dispatch(AppActionCreator.changeSortType(sortType));
     },
   };
 };

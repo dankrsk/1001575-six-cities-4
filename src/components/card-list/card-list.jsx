@@ -3,25 +3,24 @@ import PropTypes from 'prop-types';
 import {OFFER_PROP_TYPES} from '../../shared/types.js';
 import EmptyCardList from '../empty-card-list/empty-card-list.jsx';
 import DefaultCardList from '../default-card-list/default-card-list.jsx';
-import withActiveItem from '../../hocs/with-active-item/with-active-item.jsx';
+import {AppRoutes} from '../../const.js';
 
 CardList.propTypes = {
   city: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(OFFER_PROP_TYPES).isRequired,
   onFavoriteButtonClick: PropTypes.func.isRequired,
+  onCardMouseOver: PropTypes.func.isRequired,
 };
 
-const DefaultCardListWrapped = withActiveItem(DefaultCardList);
-
 function CardList(props) {
-  const {city, offers, onFavoriteButtonClick} = props;
+  const {city, offers, onFavoriteButtonClick, onCardMouseOver} = props;
 
   const getComponentByOffers = (length) => {
     switch (length) {
       case 0:
         return <EmptyCardList city={city} />;
       default:
-        return <DefaultCardListWrapped city={city} offers={offers} onFavoriteButtonClick={onFavoriteButtonClick} />;
+        return <DefaultCardList offers={offers} onFavoriteButtonClick={onFavoriteButtonClick} onCardMouseOver={onCardMouseOver} pageName={AppRoutes.MAIN} />;
     }
   };
 

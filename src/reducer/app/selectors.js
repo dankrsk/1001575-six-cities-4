@@ -7,3 +7,7 @@ export const getCurrentCity = (state) => {
 export const getAllCities = (state) => {
   return state[NameSpace.APP].allCities;
 };
+
+export const getSortType = (state) => {
+  return state[NameSpace.APP].sortType;
+};
