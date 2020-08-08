@@ -20,7 +20,7 @@ const getImagesItems = (images, title) => {
   const items = [];
   while (i < MAX_NUMBER_OF_IMAGES) {
     items.push(
-        <div key={images[i]} className="property__image-wrapper">
+        <div key={`${title}${i}`} className="property__image-wrapper">
           <img className="property__image" src={images[i]} alt={title} />
         </div>
     );

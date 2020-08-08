@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Snapshots for Main Main component 1`] = `
+exports[`Snapshots for Favorites Favorites component 1`] = `
 <div
-  className="page page--gray page--main"
+  className="page"
 >
   <header
     className="header"
@@ -41,7 +41,7 @@ exports[`Snapshots for Main Main component 1`] = `
             >
               <a
                 className="header__nav-link header__nav-link--profile"
-                href="/login"
+                href="/favorites"
                 onClick={[Function]}
               >
                 <div
@@ -50,7 +50,7 @@ exports[`Snapshots for Main Main component 1`] = `
                 <span
                   className="header__user-name user__name"
                 >
-                  Sign In
+                  foo@bar.com
                 </span>
               </a>
             </li>
@@ -60,157 +60,46 @@ exports[`Snapshots for Main Main component 1`] = `
     </div>
   </header>
   <main
-    className="page__main page__main--index"
+    className="page__main page__main--favorites"
   >
-    <h1
-      className="visually-hidden"
-    >
-      Cities
-    </h1>
     <div
-      className="tabs"
+      className="page__favorites-container container"
     >
       <section
-        className="locations container"
+        className="favorites"
       >
+        <h1
+          className="favorites__title"
+        >
+          Saved listing
+        </h1>
         <ul
-          className="locations__list tabs__list"
+          className="favorites__list"
         >
           <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item tabs__item--active"
-              href="#"
-              onClick={[Function]}
-            >
-              <span>
-                Amsterdam
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item"
-              href="#"
-              onClick={[Function]}
-            >
-              <span>
-                Cologne
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item"
-              href="#"
-              onClick={[Function]}
-            >
-              <span>
-                Berlin
-              </span>
-            </a>
-          </li>
-        </ul>
-      </section>
-    </div>
-    <div
-      className="cities"
-    >
-      <div
-        className="cities__places-container container"
-      >
-        <section
-          className="cities__places places"
-        >
-          <h2
-            className="visually-hidden"
-          >
-            Places
-          </h2>
-          <b
-            className="places__found"
-          >
-            1
-             places to stay in 
-            Amsterdam
-          </b>
-          <form
-            action="#"
-            className="places__sorting"
-            method="get"
-          >
-            <span
-              className="places__sorting-caption"
-            >
-              Sort by 
-            </span>
-            <span
-              className="places__sorting-type"
-              onClick={[Function]}
-              onKeyDown={[Function]}
-              tabIndex="0"
-            >
-              Popular
-              <svg
-                className="places__sorting-arrow"
-                height="4"
-                width="7"
-              >
-                <use
-                  xlinkHref="#icon-arrow-select"
-                />
-              </svg>
-            </span>
-            <ul
-              className="places__options places__options--custom"
-            >
-              <li
-                className="places__option places__option--active"
-                onClick={[Function]}
-                onKeyDown={[Function]}
-                tabIndex="0"
-              >
-                Popular
-              </li>
-              <li
-                className="places__option"
-                onClick={[Function]}
-                onKeyDown={[Function]}
-                tabIndex="0"
-              >
-                Price: low to high
-              </li>
-              <li
-                className="places__option"
-                onClick={[Function]}
-                onKeyDown={[Function]}
-                tabIndex="0"
-              >
-                Price: high to low
-              </li>
-              <li
-                className="places__option"
-                onClick={[Function]}
-                onKeyDown={[Function]}
-                tabIndex="0"
-              >
-                Top rated first
-              </li>
-            </ul>
-          </form>
-          <div
-            className="cities"
+            className="favorites__locations-items"
           >
             <div
-              className="places__list near-places__list"
+              className="favorites__locations locations locations--current"
+            >
+              <div
+                className="locations__item"
+              >
+                <a
+                  className="locations__item-link"
+                  href="#"
+                >
+                  <span>
+                    Amsterdam
+                  </span>
+                </a>
+              </div>
+            </div>
+            <div
+              className="favorites__places"
             >
               <article
-                className="place-card cities__place-card"
+                className="place-card favorites__card"
                 onMouseOut={[Function]}
                 onMouseOver={[Function]}
               >
@@ -222,20 +111,20 @@ exports[`Snapshots for Main Main component 1`] = `
                   </span>
                 </div>
                 <div
-                  className="place-card__image-wrapper cities__image-wrapper"
+                  className="place-card__image-wrapper favorites__image-wrapper"
                 >
                   <a>
                     <img
                       alt="Place image"
                       className="place-card__image"
-                      height="200"
+                      height="110"
                       src="http://cdn.home-designing.com/wp-content/uploads/2013/11/1-Contemporary-architecture.jpg"
-                      width="260"
+                      width="150"
                     />
                   </a>
                 </div>
                 <div
-                  className="place-card__info"
+                  className="place-card__info favorites__card-info"
                 >
                   <div
                     className="place-card__price-wrapper"
@@ -314,17 +203,27 @@ exports[`Snapshots for Main Main component 1`] = `
                 </div>
               </article>
             </div>
-          </div>
-        </section>
-        <div
-          className="cities__right-section"
-        >
-          <section
-            className="cities__map map"
-          />
-        </div>
-      </div>
+          </li>
+        </ul>
+      </section>
     </div>
   </main>
+  <footer
+    className="footer container"
+  >
+    <a
+      className="footer__logo-link"
+      href="/"
+      onClick={[Function]}
+    >
+      <img
+        alt="6 cities logo"
+        className="footer__logo"
+        height="33"
+        src="img/logo.svg"
+        width="64"
+      />
+    </a>
+  </footer>
 </div>
 `;

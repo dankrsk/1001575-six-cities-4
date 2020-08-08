@@ -32,11 +32,7 @@ const withForm = (Component) => {
     }
 
     handleRadioGroupChange(evt) {
-      if (!evt.target.validationMessage) {
-        this._isRadioGroupChecked = true;
-      } else {
-        this._isRadioGroupChecked = false;
-      }
+      this._isRadioGroupChecked = !evt.target.validationMessage;
       this._checkValidation();
     }
 

@@ -19,7 +19,7 @@ exports[`Snapshots for EmptyCardList EmptyCardList component 1`] = `
         className="cities__status-description"
       >
         We could not find any property availbale at the moment in 
-        Paris
+        Amsterdam
       </p>
     </div>
   </section>

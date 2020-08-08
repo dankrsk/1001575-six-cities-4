@@ -76,7 +76,7 @@ export const mock = {
       },
       id: 3,
       images: [imgUrl, imgUrl],
-      isFavorite: true,
+      isFavorite: false,
       isPremium: true,
       coordinates: [52.35514938496378, 4.673877537499948],
       maxAdults: 4,
@@ -144,5 +144,79 @@ export const mock = {
     // eslint-disable-next-line
     is_pro: true,
     name: `Adam Smith`,
-  }
+  },
+  comments: [
+    {
+      comment: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
+      date: `2019-05-08T14:13:56.569Z`,
+      id: 1,
+      rating: 1,
+      user: {
+        avatarUrl: imgUrl,
+        id: 1,
+        isPro: false,
+        name: `Max`,
+      }
+    },
+    {
+      comment: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
+      date: `2019-05-09T14:13:56.569Z`,
+      id: 2,
+      rating: 4,
+      user: {
+        avatarUrl: imgUrl,
+        id: 5,
+        isPro: true,
+        name: `Dan`,
+      }
+    },
+  ],
+  rawComments: [
+    {
+      comment: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
+      date: `2019-05-08T14:13:56.569Z`,
+      id: 1,
+      rating: 1,
+      user: {
+        // eslint-disable-next-line
+        avatar_url: imgUrl,
+        id: 1,
+        // eslint-disable-next-line
+        is_pro: false,
+        name: `Max`,
+      }
+    }
+  ],
+  favoriteOffers: {
+    Amsterdam: [
+      {
+        bedrooms: 3,
+        city: `Amsterdam`,
+        cityLocation: {
+          latitude: 52.370216,
+          longitude: 4.895168,
+          zoom: 10,
+        },
+        description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
+        goods: [`Heating`, `Kitchen`],
+        host: {
+          avatarUrl: imgUrl,
+          id: 1,
+          isPro: true,
+          name: `Dan`,
+        },
+        id: 1,
+        images: [imgUrl, imgUrl],
+        isFavorite: true,
+        isPremium: true,
+        coordinates: [52.35514938496378, 4.673877537499948],
+        maxAdults: 4,
+        photo: imgUrl,
+        price: 100,
+        rating: 1,
+        title: `Beautiful & luxurious apartment at great location`,
+        type: `House`,
+      },
+    ],
+  },
 };

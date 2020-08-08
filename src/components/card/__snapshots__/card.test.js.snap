@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Snapshots for Card Card component should render 1 card for mock offer 1`] = `
+exports[`Snapshots for Card Card component 1`] = `
 <article
-  className="cities__place-card place-card"
+  className="place-card cities__place-card"
   onMouseOut={[Function]}
   onMouseOver={[Function]}
 >
@@ -14,11 +14,9 @@ exports[`Snapshots for Card Card component should render 1 card for mock offer 1
     </span>
   </div>
   <div
-    className="cities__image-wrapper place-card__image-wrapper"
+    className="place-card__image-wrapper cities__image-wrapper"
   >
-    <a
-      href="#"
-    >
+    <a>
       <img
         alt="Place image"
         className="place-card__image"
@@ -94,7 +92,8 @@ exports[`Snapshots for Card Card component should render 1 card for mock offer 1
       className="place-card__name"
     >
       <a
-        href="#"
+        href="/offer/1"
+        onClick={[Function]}
       >
         Beautiful & luxurious apartment at great location
       </a>

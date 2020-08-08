@@ -18,6 +18,7 @@ const leaflet = {
   marker() {
     return {
       addTo: jest.fn(),
+      setIcon: jest.fn(),
     };
   },
 };

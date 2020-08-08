@@ -4,12 +4,13 @@ import OffersMap from './offers-map.jsx';
 import {mock} from '../../shared/test-mocks.js';
 
 describe(`Snapshots for Map`, () => {
-  it(`Map component should render container for map`, () => {
+  it(`Map component`, () => {
     const tree = renderer
       .create(<OffersMap
         offers={mock.offers}
-        city={`Paris`}
+        city={`Amsterdam`}
         activeCardId={1}
+        isNearPlaces={true}
       />)
       .toJSON();
 

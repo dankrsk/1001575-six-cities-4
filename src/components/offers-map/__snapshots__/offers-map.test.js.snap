@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Snapshots for Map Map component should render container for map 1`] = `
+exports[`Snapshots for Map Map component 1`] = `
 <section
-  className="cities__map map"
+  className="property__map map"
 />
 `;

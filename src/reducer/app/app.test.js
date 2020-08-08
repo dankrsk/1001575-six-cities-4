@@ -6,12 +6,29 @@ describe(`App reducer tests`, () => {
     expect(reducer({
       city: `Paris`,
       allCities: [`Paris`, `Berlin`],
+      sortType: `POPULAR`,
     }, {
       type: ActionType.CHANGE_CITY,
       payload: `Berlin`,
     })).toEqual({
       city: `Berlin`,
       allCities: [`Paris`, `Berlin`],
+      sortType: `POPULAR`,
+    });
+  });
+
+  it(`Reducer should change sort type`, () => {
+    expect(reducer({
+      city: `Paris`,
+      allCities: [`Paris`, `Berlin`],
+      sortType: `POPULAR`,
+    }, {
+      type: ActionType.CHANGE_SORT_TYPE,
+      payload: `LOW_TO_HIGH`,
+    })).toEqual({
+      city: `Paris`,
+      allCities: [`Paris`, `Berlin`],
+      sortType: `LOW_TO_HIGH`,
     });
   });
 
@@ -19,12 +36,14 @@ describe(`App reducer tests`, () => {
     expect(reducer({
       city: `Paris`,
       allCities: [`Paris`, `Berlin`],
+      sortType: `POPULAR`,
     }, {
       type: ActionType.GET_ALL_CITIES,
       payload: [`Cologne`, `Amsterdam`],
     })).toEqual({
       city: `Paris`,
       allCities: [`Cologne`, `Amsterdam`],
+      sortType: `POPULAR`,
     });
   });
 
@@ -32,6 +51,13 @@ describe(`App reducer tests`, () => {
     expect(ActionCreator.changeCity(`Paris`)).toEqual({
       type: ActionType.CHANGE_CITY,
       payload: `Paris`,
+    });
+  });
+
+  it(`ActionCreator, type: CHANGE_SORT_TYPE should return correct action`, () => {
+    expect(ActionCreator.changeSortType(`LOW_TO_HIGH`)).toEqual({
+      type: ActionType.CHANGE_SORT_TYPE,
+      payload: `LOW_TO_HIGH`,
     });
   });
 

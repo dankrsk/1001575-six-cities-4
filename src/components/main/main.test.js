@@ -15,14 +15,18 @@ describe(`Snapshots for Main`, () => {
   it(`Main component`, () => {
     const store = mockStore({
       [NameSpace.DATA]: {
-        offers: mock.offers,
+        comments: mock.comments,
+        nearPlaces: mock.offers,
         status: `OK`,
+        offers: mock.offers,
       },
       [NameSpace.APP]: {
-        city: `Paris`,
+        city: `Amsterdam`,
         allCities: getCitiesFromOffers(mock.offers),
+        sortType: `POPULAR`,
       },
       [NameSpace.USER]: {
+        authInfo: mock.authInfo,
         authorizationStatus: `NO_AUTH`,
       },
     });
@@ -31,11 +35,17 @@ describe(`Snapshots for Main`, () => {
           <Provider store={store}>
             <Router history={customHistory}>
               <Main
-                currentCity={`Paris`}
+                authInfo={mock.authInfo}
+                authorizationStatus={`AUTH`}
+                currentCity={`Amsterdam`}
                 offers={mock.offers}
                 allCities={getCitiesFromOffers(mock.offers)}
                 onCityLinkClick={() => {}}
                 onFavoriteButtonClick={() => {}}
+                handleCardAction={() => {}}
+                activeCardId={1}
+                sortType={`POPULAR`}
+                onSortTypeChange={() => {}}
               />
             </Router>
           </Provider>

@@ -8,7 +8,7 @@ describe(`Snapshots for CityList`, () => {
   it(`CityList component`, () => {
     const tree = renderer
       .create(<CityList
-        currentCity={`Paris`}
+        currentCity={`Amsterdam`}
         allCities={getCitiesFromOffers(mock.offers)}
         onCityLinkClick={() => {}}
       />)

@@ -11,8 +11,7 @@ import {getAuthorizationStatus, getAuthInfo} from '../../reducer/user/selectors.
 import PropTypes from 'prop-types';
 import Offer from '../offer/offer.jsx';
 import {getOffers, getStatus, getComments, getNearPlaces, getFavoriteOffers} from '../../reducer/data/selectors.js';
-import {getScreen} from '../../utils/common.js';
-import {checkAuth} from '../../utils/common.js';
+import {getScreen, checkAuth} from '../../utils/common.js';
 import withActiveItem from '../../hocs/with-active-item/with-active-item.jsx';
 import {OFFER_PROP_TYPES, AUTH_INFO_PROP_TYPES, COMMENTS_PROP_TYPES} from '../../shared/types.js';
 import ScrollToTop from 'react-router-scroll-top';

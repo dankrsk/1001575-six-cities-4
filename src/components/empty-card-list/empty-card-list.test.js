@@ -6,7 +6,7 @@ describe(`Snapshots for EmptyCardList`, () => {
   it(`EmptyCardList component`, () => {
     const tree = renderer
       .create(<EmptyCardList
-        city={`Paris`}
+        city={`Amsterdam`}
       />)
       .toJSON();
 

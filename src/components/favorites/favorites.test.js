@@ -1,20 +1,20 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Card from '../card/card.jsx';
+import Favorites from '../favorites/favorites.jsx';
 import {mock} from '../../shared/test-mocks.js';
 import {Router} from 'react-router-dom';
 import customHistory from '../../history.js';
 
-describe(`Snapshots for Card`, () => {
-  it(`Card component`, () => {
+describe(`Snapshots for Favorites`, () => {
+  it(`Favorites component`, () => {
     const tree = renderer
       .create(
           <Router history={customHistory}>
-            <Card
-              offer={mock.offers[0]}
-              onCardMouseOver={() => {}}
+            <Favorites
+              authInfo={mock.authInfo}
+              authorizationStatus={`AUTH`}
+              offers={mock.favoriteOffers}
               onFavoriteButtonClick={() => {}}
-              pageName={`/`}
             />
           </Router>
       )

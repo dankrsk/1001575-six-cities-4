@@ -13,14 +13,18 @@ describe(`Snapshots for App`, () => {
   it(`App component`, () => {
     const store = mockStore({
       [NameSpace.DATA]: {
-        offers: mock.offers,
+        comments: mock.comments,
+        nearPlaces: mock.offers,
         status: `OK`,
+        offers: mock.offers,
       },
       [NameSpace.APP]: {
-        city: `Paris`,
+        city: `Amsterdam`,
         allCities: getCitiesFromOffers(mock.offers),
+        sortType: `POPULAR`,
       },
       [NameSpace.USER]: {
+        authInfo: mock.authInfo,
         authorizationStatus: `NO_AUTH`,
       },
     });
