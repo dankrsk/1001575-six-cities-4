@@ -18,9 +18,9 @@ ReviewForm.propTypes = {
 const NUMBER_OF_RATING_STARS = 5;
 
 const getRatingInputs = (isAllFieldDisabled) => {
-  const markup = [];
+  const ratingInputs = [];
   for (let i = NUMBER_OF_RATING_STARS; i > 0; i--) {
-    markup.push(
+    ratingInputs.push(
         <React.Fragment key={i}>
           <input className="form__rating-input visually-hidden" name="rating" value={i} id={`${i}-stars`} type="radio" disabled={isAllFieldDisabled} required />
           <label htmlFor={`${i}-stars`} className="reviews__rating-label form__rating-label" title={StringRating[i - 1]}>
@@ -31,7 +31,7 @@ const getRatingInputs = (isAllFieldDisabled) => {
         </React.Fragment>
     );
   }
-  return markup;
+  return ratingInputs;
 };
 
 function ReviewForm(props) {

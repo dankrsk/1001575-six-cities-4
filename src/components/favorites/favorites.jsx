@@ -15,11 +15,11 @@ Favorites.propTypes = {
 };
 
 const getItems = (offers, onFavoriteButtonClick) => {
-  const itemsMarkup = [];
+  const favoriteItems = [];
 
   for (const key in offers) {
     if (Object.prototype.hasOwnProperty.call(offers, key)) {
-      itemsMarkup.push(
+      favoriteItems.push(
           <li key={offers[key][0].city} className="favorites__locations-items">
             <div className="favorites__locations locations locations--current">
               <div className="locations__item">
@@ -46,7 +46,7 @@ const getItems = (offers, onFavoriteButtonClick) => {
     }
   }
 
-  return itemsMarkup;
+  return favoriteItems;
 };
 
 function Favorites(props) {

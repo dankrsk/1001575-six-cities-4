@@ -68,9 +68,8 @@ export default class OffersMap extends React.Component {
     this._currentCity = props.city;
     this._renderedOffers = props.offers;
 
-    const city = [props.offers[0].cityLocation.latitude, props.offers[0].cityLocation.longitude];
     this._map = leaflet.map(this._mapContainerRef.current, {
-      center: city,
+      center: [props.offers[0].cityLocation.latitude, props.offers[0].cityLocation.longitude],
       zoom: props.offers[0].cityLocation.zoom,
       zoomControl: false,
       marker: true
@@ -90,8 +89,8 @@ export default class OffersMap extends React.Component {
     const props = this.props;
     if (this._currentCity !== props.city || props.offers !== this._renderedOffers) {
       this._currentCity = props.city;
-      const city = [props.offers[0].cityLocation.latitude, props.offers[0].cityLocation.longitude];
-      this._map.setView(city, props.offers[0].cityLocation.zoom);
+      const cityCoordinates = [props.offers[0].cityLocation.latitude, props.offers[0].cityLocation.longitude];
+      this._map.setView(cityCoordinates, props.offers[0].cityLocation.zoom);
 
       this._removeMarkers();
       this._renderMarkers();
